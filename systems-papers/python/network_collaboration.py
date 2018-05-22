@@ -23,14 +23,12 @@ graph.setAttribute("graph", "defaultedgetype", "undirected")
 
 # iterate through conference files (containing papers)
 directory = authors.conf_directory
-# files     = os.listdir(directory)
+files     = filter(lambda x : x.endswith(".json"), os.listdir(directory))
 
-files     = os.listdir(directory)[:10]
-# print(len(files))
-# quit()
+# for now, just analyzing a subset of the data
+files = files[:10]
 
 for filename in files:
-    if not filename.endswith(".json"): continue
     data = authors.getData(directory + filename)
     papers = data['papers']
     for paper in papers:
