@@ -3,7 +3,10 @@
 Creates a network of author collaboration.
 
 - Nodes are identified by the respective author's names.
-- Edges are identified by the key of the paper that it represents collaboration on, with an integer suffix to distinguish the many edges resulting from one paper collaboration. For example, a paper with three authors results in three edges, since each author collaborated with each other author once.
+- Edges are identified by the key of the paper that it represents collaboration on, with an 
+  integer suffix to distinguish the many edges resulting from one paper collaboration. For 
+  example, a paper with three authors results in three edges, since each author collaborated 
+  with each other author once.
 
 """
 
