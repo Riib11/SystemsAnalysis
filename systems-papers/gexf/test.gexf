@@ -1,0 +1,11 @@
+<gexf>
+    <graph mode="static">
+        <nodes>
+            <node id="A" label="A"/>
+            <node id="B" label="B"/>
+        </nodes>
+        <edges>
+            <edge id="A->B" source="A" target="B"/>
+        </edges>
+    </graph>
+</gexf>
