@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# AUTHOR: Eitan Frachtenburg
+# AUTHOR: Eitan Frachtenburg, Henry Blanchette
 #
 ##############################################################################
 
@@ -49,13 +49,37 @@ def author_name(name):
     return clean, affil
 
 ##############################################################################
+# author_uname(): return the unique name of an author, created by appending the author_name() with the google scholar email handle, e.g. "John Doe@mail.com" 
+def author_uname(name, features):
+    name = normalized_author_name(name)
+    # binary search for name
+    i = len(features)//2 # index
+    s = len(features)//4 # step
+    n = features[i]['name'] # current name
+    gs_email = "_"
+    end = False
+    while n != name and s != 0:
+        # go right
+        if n < name: i += s
+        # go left
+        else: i -= s
+        # update step
+        s = s//2
+        # update n
+        n = features[i]['name']
+        if n == name:
+            gs_email = features[i]["gs_email"]
+            break
+    if s == 0: print(n)
+    return name+" : "+gs_email
+
+##############################################################################
 # normalize_author_name(): break an author string to a name and (optional)
 # affiliation, and return the name only, last first, title case, no honorifics
 def normalized_author_name(name):
     recased = name.title().replace('Jr.', '').replace('Sr.', '').replace('Dr.', '').replace('Prof.', '')
     names = author_name(recased)[0].split()
     return names[-1] + ", " + " ".join(names[:-1])
-
 
 ##############################################################################
 # load_csv_file(): Try to read a CSV file and return its contents.

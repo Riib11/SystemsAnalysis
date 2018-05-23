@@ -9,9 +9,13 @@ edges: collaboration of the connected authors on a paper
 
 import json
 
-data_directory    = "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/authors/data/"
-authors_directory = data_directory + "authors/"
-conf_directory    = data_directory + "conf/"
+systems_papers_directory = "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/"
+
+data_directory     = systems_papers_directory+"authors/data/"
+authors_directory  = data_directory+"authors/"
+conf_directory     = data_directory+"conf/"
+
+features_directory = systems_papers_directory+"authors/features/"
 
 def fileToString(path):
     try:

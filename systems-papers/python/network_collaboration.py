@@ -27,21 +27,23 @@ graph.setAttribute("graph", "defaultedgetype", "undirected")
 # iterate through conference files (containing papers)
 directory = authors.conf_directory
 files     = filter(lambda x : x.endswith(".json"), os.listdir(directory))
-
-# for now, just analyzing a subset of the data
-files = files[:10]
+features  = utils.load_csv_file( authors.features_directory+"authors.csv")
 
 for filename in files:
     data = authors.getData(directory + filename)
     papers = data['papers']
     for paper in papers:
         paper_key    = paper['key'] # String
-        author_names = [ utils.author_name(a)[0] for a in paper['authors']] # [String]
+        author_names = [ utils.author_uname(a,features) for a in paper['authors']] # [String]
+
+        # print(author_names[:3])
+
         uid_suffix   = 0 # unique integer suffix to distinguish edges created by this paper
         for (a1,a2) in combos.pairs_unordered(author_names):
             graph.addNode(a1)
             graph.addNode(a2)
             graph.addEdge(paper_key+"_"+str(uid_suffix), a1, a2)
             uid_suffix += 1
+    quit()
 
-graph.write("/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/gexf/")
+# graph.write("/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/gexf/")
