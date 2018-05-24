@@ -70,7 +70,6 @@ def author_uname(name, features):
         if n == name:
             gs_email = features[i]["gs_email"]
             break
-    if s == 0: print(n)
     return name+" : "+gs_email
 
 ##############################################################################

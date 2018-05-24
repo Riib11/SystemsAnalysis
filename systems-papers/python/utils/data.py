@@ -1,13 +1,5 @@
-"""
-
-Read in authors' data
-
-nodes: authors
-edges: collaboration of the connected authors on a paper
-
-"""
-
 import json
+import os
 
 systems_papers_directory = "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/"
 
@@ -26,11 +18,20 @@ def fileToString(path):
     except:
         print("[!] Problem reading file at: " + path)
 
-def getData(path):
+def getJSONData(path):
     data_raw = fileToString(path)
     return json.loads(data_raw)
 
-# example:
-if 0:
-    data = getData(conf_directory+"ASPLOS.json")
-    print(data['key'])
+def getJSONFilenames(directory):
+    return filter(lambda x : x.endswith(".json") and not x.endswith("template.json"), os.listdir(directory))
+
+def getConferenceFilenames():
+    return getJSONFilenames(data_directory+"conf/")
+
+# get json file in data/conf
+def getPapers(conf_filename):
+    return getJSONData(conf_directory+conf_filename)
+
+# get json file in data/authors
+def getAuthors(conf_filename):
+    return getJSONData(authors_directory+conf_filename)

@@ -17,12 +17,17 @@ class GEXF:
     def setAttribute(self, tag, key, value):
         self.attributes[tag][key] = value
 
-    def addNode(self, id, label=None):
-        label = label or id
-        self.nodes[id] = {"id": id, "label":label}
+    def addNode(self, id, attributes=None):
+        attributes = attributes or {}
+        attributes["id"] = id
+        self.nodes[id] = attributes
 
-    def addEdge(self, id, source, target, weight=1):
-        self.edges[id] = {"id": id, "source":source, "target":target, "weight":weight}
+    def addEdge(self, id, source, target, weight, attributes=None):
+        attributes = attributes or {}
+        attributes["id"] = id
+        attributes["source"] = source
+        attributes["target"] = target
+        self.edges[id] = attributes
 
     def write(self, directory):
         xml = XML(self.name + ".gexf")

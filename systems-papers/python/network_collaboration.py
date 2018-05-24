@@ -18,32 +18,35 @@ from tqdm import tqdm
 
 # modules
 from gexf.gexf import GEXF
-import network_collaboration.authors as authors
+import utils.data as u_data
+import authors.authors_stats as a_stats
 
 # graph init
 graph = GEXF("network_collaboration")
 graph.setAttribute("graph", "defaultedgetype", "undirected")
 
-# iterate through conference files (containing papers)
-directory = authors.conf_directory
-files     = filter(lambda x : x.endswith(".json"), os.listdir(directory))
-features  = utils.load_csv_file( authors.features_directory+"authors.csv")
+hindecies = a_stats.getAllAuthorHIndeces()
 
-for filename in files:
-    data = authors.getData(directory + filename)
+# iterate through papers
+conf_filenames = u_data.getConferenceFilenames()
+features = a_stats.getAllAuthorFeatures()
+for conf_filename in conf_filenames:
+    data = u_data.getPapers(conf_filename)
     papers = data['papers']
     for paper in papers:
         paper_key    = paper['key'] # String
-        author_names = [ utils.author_uname(a,features) for a in paper['authors']] # [String]
-
-        # print(author_names[:3])
-
+        author_names = [ a_stats.getAuthorUName(a,features) for a in paper['authors']] # [String]
         uid_suffix   = 0 # unique integer suffix to distinguish edges created by this paper
         for (a1,a2) in combos.pairs_unordered(author_names):
+            if a1 > a2: a1, a2 = a2, a1 # put in alphabetical order
+            # attributes
+            a1_attrs, a2_attrs = {}, {}
+            if a1 in hindecies: a1_attrs["hindex"] = hindecies[a1]
+            if a2 in hindecies: a2_attrs["hindex"] = hindecies[a2]
+            # add to graph
             graph.addNode(a1)
             graph.addNode(a2)
-            graph.addEdge(paper_key+"_"+str(uid_suffix), a1, a2)
+            graph.addEdge(paper_key+"_"+str(uid_suffix), a1, a2, 1)
             uid_suffix += 1
-    quit()
 
 # graph.write("/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/gexf/")
