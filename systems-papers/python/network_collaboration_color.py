@@ -18,7 +18,7 @@ Creates a colored network of author collaboration.
 
     - Coloring:
         - Color: Interpolates between Red and Blue, where Red is high and Blue is low (normalized for data set).
-        - Node: Colored by the `color_attribute` of the author that the node reprents. Is that max of all values found among data/authors/*.json.
+        - Node: Colored by the `color_attribute` of the author that the node reprents. Is that max of all values found among data/authors/*.json. If the target attribtute is not avaliable for a node, the node is colored black.
         - Edge: Colored by the maximum value of the nodes connected by this edge.
 
 """
