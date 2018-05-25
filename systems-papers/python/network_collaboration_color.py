@@ -1,16 +1,30 @@
 """
 
-Creates a network of author collaboration.
+Creates a colored network of author collaboration.
 
-- Nodes are identified by the respective author's names.
-- Edges are identified by the key of the paper that it represents collaboration on, with an 
-  integer suffix to distinguish the many edges resulting from one paper collaboration. For 
-  example, a paper with three authors results in three edges, since each author collaborated 
-  with each other author once.
+- Usage:
+
+    - navigate to `.../SystemsAnalysis/systems-analysis/python`.
+    - run `python3 network_collaboration_color.py <color_attribute>` where `<color_attribute>` is replaced by the attribute you want to color the graph by.
+
+- Info:
+
+    - Nodes are identified by the respective author's names.
+
+    - Edges are identified by the key of the paper that it represents collaboration on, with an 
+      integer suffix to distinguish the many edges resulting from one paper collaboration. For 
+      example, a paper with three authors results in three edges, since each author collaborated 
+      with each other author once.
+
+    - Coloring:
+        - Color: Interpolates between Red and Blue, where Red is high and Blue is low (normalized for data set).
+        - Node: Colored by the `color_attribute` of the author that the node reprents. Is that max of all values found among data/authors/*.json.
+        - Edge: Colored by the maximum value of the nodes connected by this edge.
 
 """
 
 # utilities
+import sys
 import os
 import numpy as np
 import utils.shared_utils as utils
@@ -23,12 +37,16 @@ from gexf.gexf import GEXF
 import utils.data as u_data
 import authors.author_stats as a_stats
 
+if len(sys.argv) < 2:
+    print("[!] Please supply an author attribute name to color with (e.g 'hindex').")
+    quit()
+
 # graph init
 graph = GEXF("network_collaboration_colors-hindex")
 # parameters
 graph.setParameter("graph", "defaultedgetype", "undirected")
 # attributes
-color_attribute = "i10index5y"
+color_attribute = sys.argv[1]
 graph.addAttribute( "node" , "color"  , "string", "#000000")
 graph.addAttribute( "node" , color_attribute , "float" , "-1.0")
 graph.addAttribute( "edge" , "color"  , "string", "#000000")
@@ -46,8 +64,6 @@ print(" - max    :", color_attribute_max)
 print(" - mean   :", np.mean(color_attribute_dict_values))
 print(" - median :", np.median(color_attribute_dict_values))
 print(" - std    :", np.std(color_attribute_dict_values))
-
-quit()
 
 def colorAttributeToColor(val):
     norm = (val - color_attribute_min) / color_attribute_max
