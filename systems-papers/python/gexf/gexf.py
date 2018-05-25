@@ -6,43 +6,92 @@ class GEXF:
 
     def __init__(self, name):
         self.name = name
-        self.attributes = {
+        self.parameters = {
             "gexf"  : {"version":GEXF.version},
             "graph" : {"mode":"static"},
-            "nodes" : {},
-            "edges" : {}}
+            "node" : {},
+            "edge" : {}}
+        self.attributes = {
+            "node" : {},
+            "edge" : {}}
         self.nodes = {}
         self.edges = {}
 
-    def setAttribute(self, tag, key, value):
-        self.attributes[tag][key] = value
+    def setParameter(self, tag, key, value):
+        self.parameters[tag][key] = value
+
+    def addAttribute(self, cls, title, type, default):
+        self.attributes[cls][title] = {"id":title, "type":type, "default":default}
 
     def addNode(self, id, attributes=None):
-        attributes = attributes or {}
-        attributes["id"] = id
-        self.nodes[id] = attributes
+        node = {
+            "id"         : id,
+            "attributes" : attributes or {}
+        }
+        self.nodes[id] = node
 
-    def addEdge(self, id, source, target, weight, attributes=None):
-        attributes = attributes or {}
-        attributes["id"] = id
-        attributes["source"] = source
-        attributes["target"] = target
-        self.edges[id] = attributes
+    def addEdge(self, id, source, target, weight=1, attributes=None):
+        edge = {
+            "id"        : id,
+            "source"    : source,
+            "target"    : target,
+            "weight"    : weight,
+            "attributes": attributes or {}
+        }
+        self.edges[id] = edge
 
     def write(self, directory):
         xml = XML(self.name + ".gexf")
         
         # start gexf
-        xml.addHeader("gexf"  , self.attributes["gexf"])
-        xml.addHeader("graph" , self.attributes["graph"])
+        xml.addHeader("gexf"  , self.parameters["gexf"])
+        xml.addHeader("graph" , self.parameters["graph"])
+
+        # attributes
+        for cls, attrs in self.attributes.items():
+            xml.addHeader("attributes" , {"class":cls})
+            for title, data in attrs.items():
+                # title
+                data["title"] = title
+                # default
+                default = data["default"]
+                del data["default"]
+                # attribute
+                xml.addHeader("attribute", data)
+                xml.addTagSpan("default", default)
+                xml.addFooter("attribute")
+            xml.addFooter("attributes")
 
         # nodes
-        xml.addHeader("nodes", self.attributes["nodes"])
-        for node in self.nodes.values(): xml.addTag("node", node)
+        xml.addHeader("nodes", self.parameters["node"])
+        for node_id, node in self.nodes.items():
+            # start edge
+            xml.addHeader("node", {"id":node_id})
+            # attributes
+            node_attrs = node["attributes"]
+            xml.addHeader("attvalues")
+            for title, value in node_attrs.items():
+                att_for_id = self.attributes["node"][title]["id"]
+                xml.addTag("attvalue",{ "for":att_for_id, "value": value })
+            xml.addFooter("attvalues")
+            # end node
+            xml.addFooter("node")
         xml.addFooter("nodes")
+
         # edges
-        xml.addHeader("edges", self.attributes["edges"])
-        for edge in self.edges.values(): xml.addTag("edge", edge)
+        xml.addHeader("edges", self.parameters["edge"])
+        for edge_id, edge in self.edges.items():
+            # start edge
+            xml.addHeader("edge", {"id":edge_id, "source":edge["source"], "target":edge["target"]})
+            # attributes
+            edge_attrs = edge["attributes"]
+            xml.addHeader("attvalues")
+            for title, value in edge_attrs.items():
+                att_for_id = self.attributes["edge"][title]["id"]
+                xml.addTag("attvalue",{ "for":att_for_id, "value": value })
+            xml.addFooter("attvalues")
+            # edge edge
+            xml.addFooter("edge")
         xml.addFooter("edges")
         
         # end gexf

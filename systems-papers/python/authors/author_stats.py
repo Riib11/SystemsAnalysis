@@ -9,20 +9,16 @@ def getAuthorUName(author, features):
     return utils.author_uname(author, features)
 
 # does full pass through data/conf
-def getAllAuthorHIndecies():
+def getAllAuthorsAttribute(attr):
     conf_filenames = u_data.getConferenceFilenames()
-    hindecies = {}
+    values = {}
     for conf_filename in conf_filenames:
         authors = u_data.getAuthors(conf_filename)
         for a_name, a_data in authors.items():
-            if isinstance(a_data, str) or not "hindex" in a_data: continue
-            h_ind = a_data["hindex"]
-            print(h_ind)
+            if isinstance(a_data, str) or not attr in a_data: continue
+            val = a_data[attr]
             # update existing entry
-            if a_name in hindecies:
-                prev = hindecies[a_name]
-                hindecies[a_name] = max(prev,h_ind)
+            if a_name in values: values[a_name] = max(values[a_name],val)
             # add entry
-            else:
-                hindecies[a_name] = h_ind
-    return hindecies
+            else: values[a_name] = val
+    return values

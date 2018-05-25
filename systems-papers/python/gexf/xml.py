@@ -1,14 +1,21 @@
+from tqdm import tqdm
+
 class XML:
 
     indentation = "    "
 
     def __init__(self, name):
         self.name = name
-        self.content = ""
+        self.content = []
+        self.current = ""
         self.indent_level = 0
 
+    def add(self):
+        self.content.append(self.current)
+        self.current = ""
+
     def indent(self):
-        self.content += self.indent_level * XML.indentation
+        self.current += self.indent_level * XML.indentation
 
     def indentIn(self):
         self.indent()
@@ -18,26 +25,43 @@ class XML:
         self.indent_level -= 1
         self.indent()
 
-    def addHeader(self, tag, attributes):
+    def addHeader(self, tag, attributes=None):
+        attributes = attributes or {}
         self.indentIn()
         header = "<"+tag
         for k,v in attributes.items():
             header += " "+k+"=\""+str(v)+"\""
         header += ">"
-        self.content += header + "\n"
+        self.current += header + "\n"
+        self.add()
 
     def addFooter(self, tag):
         self.indentOut()
-        self.content += "</"+tag+">" + "\n"
+        self.current += "</"+tag+">" + "\n"
+        self.add()
 
-    def addTag(self, tag, attributes):
+    def addTag(self, tag, attributes=None):
+        attributes = attributes or {}
         self.indent()
         tag = "<" + tag
         for k,v in attributes.items():
             tag += " "+k+"=\""+str(v)+"\""
         tag += "/>"
-        self.content += tag + "\n"
+        self.current += tag + "\n"
+        self.add()
+
+    def addTagSpan(self, tag, content, attributes=None):
+        attributes = attributes or {}
+        self.indentIn()
+        self.indent_level -= 1
+        header = "<"+tag
+        for k,v in attributes.items():
+            header += " "+k+"=\""+str(v)+"\""
+        header += ">"
+        footer = "</"+tag+">"
+        self.current += header + str(content) + footer + "\n"
+        self.add()
 
     def write(self, directory):
         with open(directory + self.name, 'w+') as file:
-            file.write(self.content)
+            for line in tqdm(self.content): file.write(line)
