@@ -24,8 +24,8 @@ def getBibtexValue(line):
     line = line[:i]
     return line
 
-def getCitationsTitles(paper_id):
-    bibtex = getBibtex(paper_id)
+def getCitationsTitles(paper_key):
+    bibtex = getBibtex(paper_key)
     titles = []
     
     inside = False
@@ -41,19 +41,31 @@ def getCitationsTitles(paper_id):
     
     return titles
 
-def getCitationsData(paper_id):
-    bibtex = getBibtex(paper_id)
-    data = {"author":[],"journal":[],"title":[],"year":[]}
+def toDataAuthorName(name):
+    name = name.split(",")
+    for i in range(len(name)):
+        name[i] = name[i].replace(" ","").replace(".","")
+    if len(name) == 2:
+        return name[1]+" "+name[0]
+    return name[0]
+
+def getCitationsData(paper_key):
+    bibtex = getBibtex(paper_key)
+    data = {"size":0,"author":[],"journal":[],"title":[],"year":[]}
     keys = data.keys()
     inside = False
     for line in bibtex:
         if not inside:
             inside = line.startswith("@proceedings")
         else:
-            if line.startswith("}"): inside = False
+            if line.startswith("}"):
+                inside = False
+                data["size"] += 1
             else:
                 value = getBibtexValue(line)
                 for key in keys:
                     if line.startswith(key):
-                        data[key].append(value)
+                        if key == "author":
+                            value = [ toDataAuthorName(n) for n in value.split(".,")]
+                        data[key].append(str(value))
     return data

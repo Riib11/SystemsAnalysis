@@ -15,6 +15,8 @@ class NET:
             }
             self.nodes[label] = node
             self.node_count += 1
+            return self.node_count - 1
+        return False
 
     def addEdge(self, label, source, target, weight=1, attributes=None):
         edge = {
@@ -25,7 +27,7 @@ class NET:
             "attributes": attributes or {}
         }
         self.edges[label] = edge
-
+        
     def write(self, directory):
         file = open(directory + self.name + ".net", "w+")
         # vertices header

@@ -20,11 +20,6 @@ def load_json_file(fn, force=True):
 #     filenames = os.listdir(dirname)
 
 
-def safeDictCheck(d,k,target):
-    if not k in d: return False
-    value = d[k]
-    return value == target
-
 # src: https://stackoverflow.com/questions/2460177/edit-distance-in-python
 def editdist(s1, s2):
     if len(s1) > len(s2):
@@ -43,9 +38,9 @@ def editdist(s1, s2):
 
 class SSSearch:
 
-    def __init__(self, dirname, threshold):
+    def __init__(self, dirname, thresholds):
         self.dirname = dirname
-        self.threshold = threshold
+        self.thresholds = thresholds
         self.entries = []
 
     def loadfile(self, filename):
@@ -53,35 +48,56 @@ class SSSearch:
         self.entries = json.load(file)
         file.close()
 
+    def cleanName(self, name):
+        name = name.split()
+        if len(name) == 1: return name[0]
+        return name[0][0:1].capitalize() + " " + name[1]
+
     def query(self,authors,title,year):
         filenames = os.listdir(self.dirname)
         possibles = [] # entry objects
         distances = [] # total distance score for each object
+
+        threshold = 0
+        if "author" in self.thresholds: threshold += self.thresholds["author"]
+        if "title"  in self.thresholds: threshold += self.thresholds["title"]
+
         for filename in filenames:
             if not filename.endswith(".json"): continue
             self.loadfile(filename)
             for entry in tqdm(self.entries):
-                # year (have to get this right)
-                if True: # safeDictCheck(entry,"year",year):
-                    dist = (
-                        # title
-                        editdist(entry["title"],title) +
-                        # authors
-                        min([ editdist(auth1["name"],a2)
+                year_dist, title_dist, auth_dist = 0,0,0
+                # check if year is within threshold
+                if year and "year" in entry:
+                    year_dist = editdist(str(entry["year"])[0:4],year[0:4])
+                    if year_dist >= self.thresholds["year"]: continue                
+                # check if title is within threshold
+                if title and "title" in entry:
+                    title_dist = editdist(entry["title"],title)
+                    if title_dist >= self.thresholds["title"]: continue
+                # check if authors are within threshold
+                if authors and "authors" in entry: # TODO: check each author individually?
+                    auth_dist += (
+                        min([ editdist(
+                                self.cleanName(auth1["name"]),
+                                self.cleanName(a2))
                             for auth1 in entry["authors"]
                             for a2 in authors ]))
-                    # threhold
-                    if dist <= self.threshold:
-                        possibles.append(entry)
-                        distances.append(dist)
+                    if auth_dist >= self.thresholds["author"]: continue
+                # add to possibilities
+                possibles.append(entry)
+                distances.append(year_dist + title_dist + auth_dist)
 
         # get min
         i_min = 0
-        dist_min = self.threshold
+        dist_min = 10000000
+        error = True
         for i in range(len(distances)):
             d = distances[i]
             if d < dist_min:
+                error = False
                 dist_min = d
                 i_min = i
-        print(len(possibles))
+        
+        if error: raise Exception("Didn't find semantic scholar query for paper with title '" + title + "'")
         return possibles[i_min], dist_min

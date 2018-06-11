@@ -2,11 +2,15 @@
 
 Creates a network of paper citations.
 
-- Info:
+Info:
 
-    - Nodes represent an individual paper, which may or may not be in the data set.
+Nodes:
+- represent an individual paper, which may or may not be in the data set.
+- are identified by their id in the semantic-scholar database
 
-    - Edges are directed and represent the source paper's citation of the target paper.
+Edges:
+- are directed and represent the source paper's citation of the target paper.
+- are identified by the key of the source paper with a unique suffix (since there are multiple citations per source)
 
 """
 
@@ -26,7 +30,24 @@ from net.net import NET
 import utils.data as u_data
 import papers.paper_features as p_features
 
+#----------------------------------------------------------------------------------
+# To get running:
+# - replace 'data dir path' with path to the semantic scholar database
+# - make sure that you can accurately search for papers. use `ss3querytest.py`
+# - tune thresholds (use random sampling to justify)
+#----------------------------------------------------------------------------------
+
 def generate():
+
+    # search init
+    s3 = sssearch.SSSearch(
+        # data dir path
+        "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/semantic-scholar/",
+        { # thresholds
+            "author": 50,
+            "title": 50,
+            "year": 2
+        })
     
     # graph init
     graph = NET("network_citation_net")
@@ -45,23 +66,27 @@ def generate():
         data = u_data.getPapers(conf_filename)
         papers = data['papers']
         for paper in papers:
-            key = paper["key"]
-            title = clean(paper["title"])
-            # make node for paper
-            graph.addNode(title, {
-                "conference" : conf_name,
-                "title"      : title,
-                "key"        : key
-            })
-            # make citation edges
+            bibtex = p_features.getCitationsData(key)
+            s3entry, _ = s3.query("2017",None,paper["title"])
+            # Dict organization
+            # paper   : {key, title, authors}
+            # bibtex  : {author, journal, title, year}
+            # s3entry : {id, authors, title, abstract, journalName}
+            
+            # make node for this paper
+            graph.addNode(s3entry["id"], {}) # TODO: node attributes
+            
+            # make edges to papers that this paper cites
             e_id = key
             uid_suffix = 0
-            for t in p_features.getCitationsTitles(key):
-                t = clean(t)
-                graph.addNode(t)
-                graph.addEdge(e_id+str(uid_suffix), title, t, 1)
+            for i in range(bibtex["size"]):
+                s3cit, _ = s3.query(
+                    bibtex["year"],
+                    bibtex["author"],
+                    bibtex["title"])
+                graph.addNode(s3cit["id"], {}) # TODO: node attributes
+                graph.addEdge(e_id+str(uid_suffix), s3entry["id"], s3cit["id"])
                 uid_suffix += 1
-
 
     print("------------------------------------------------")
     print("[%] Writing file:")
