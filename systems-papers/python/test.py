@@ -1,17 +1,19 @@
-# from gexf.gexf import GEXF
+import utils.shared_utils as utils
+import semantic_scholar.sssearch as sssearch
 
-# g = GEXF("attrtest")
-# g.setParameter("graph", "defaultedgetype", "undirected")
+s3 = sssearch.SSSearch(
+    "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/semantic-scholar/",
+    50
+)
 
-# g.addAttribute("node", "color", "string", "#000000")
+result, dist = s3.query(
+    ["Kate Jack"],
+    "Organizing a search for an academic administrator.",
+    1986
+)
 
-# g.addNode("n_0", {"color":"#FF0000"})
-# g.addNode("n_1", {"color":"#00FF00"})
+print(dist,":",result["title"])
 
-# g.addEdge("e_0", "n_0", "n_1")
-
-# g.write("/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/gexf/")
-
-with open("/Users/Henry/Downloads/test.py", "w+") as file:
-    file.write("hello ")
-    file.write("world!")
+# utils.save_json_file(
+#     "/Users/Henry/Downloads/result.json",
+#     result)

@@ -9,6 +9,8 @@ conf_directory     = data_directory+"conf/"
 
 features_directory = systems_papers_directory+"authors/features/"
 
+papers_directory   = systems_papers_directory + "sys-papers/"
+
 def fileToString(path):
     try:
         with open(path, 'r') as file:

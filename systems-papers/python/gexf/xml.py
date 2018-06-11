@@ -3,6 +3,7 @@ from tqdm import tqdm
 class XML:
 
     indentation = "    "
+    disallowed  = "&\"%<>"
 
     def __init__(self, name):
         self.name = name
@@ -30,7 +31,7 @@ class XML:
         self.indentIn()
         header = "<"+tag
         for k,v in attributes.items():
-            header += " "+k+"=\""+str(v)+"\""
+            header += " "+k+"=\""+str(self.clean(v))+"\""
         header += ">"
         self.current += header + "\n"
         self.add()
@@ -45,7 +46,7 @@ class XML:
         self.indent()
         tag = "<" + tag
         for k,v in attributes.items():
-            tag += " "+k+"=\""+str(v)+"\""
+            tag += " "+k+"=\""+str(self.clean(v))+"\""
         tag += "/>"
         self.current += tag + "\n"
         self.add()
@@ -56,7 +57,7 @@ class XML:
         self.indent_level -= 1
         header = "<"+tag
         for k,v in attributes.items():
-            header += " "+k+"=\""+str(v)+"\""
+            header += " "+k+"=\""+str(self.clean(v))+"\""
         header += ">"
         footer = "</"+tag+">"
         self.current += header + str(content) + footer + "\n"
@@ -64,4 +65,9 @@ class XML:
 
     def write(self, directory):
         with open(directory + self.name, 'w+') as file:
-            for line in tqdm(self.content): file.write(line)
+            for line in tqdm(self.content):
+                file.write(line)
+
+    def clean(self, s):
+        for c in XML.disallowed: s = s.replace(c,"")
+        return s
