@@ -1,19 +1,23 @@
 import utils.shared_utils as utils
 import semantic_scholar.sssearch as sssearch
 
+semantic_scholar_dir = "/data/sda/semanticscholar/"
+# semantic_scholar_dir = "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/semantic-scholar/"
+
 s3 = sssearch.SSSearch(
-    "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/semantic-scholar/",
+    semantic_scholar_dir,
     {
         "year"   : 1,
         "title"  : 50,
         "author" : 50,
-    }
+    },
+    True
 )
 
 result, dist = s3.query(
-    ["Kate Jack"],
-    "Organizing a search for an academic administrator.",
-    "1986"
+    ["Svilen Kanev", "Sam Xi", "Gu-Yeon Wei", "David Brooks"],
+    "Mallacc: Accelerating Memory Allocation",
+    "2017"
 )
 
 print(dist,":",result["title"])

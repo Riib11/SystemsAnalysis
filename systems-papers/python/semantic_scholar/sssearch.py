@@ -38,9 +38,10 @@ def editdist(s1, s2):
 
 class SSSearch:
 
-    def __init__(self, dirname, thresholds):
+    def __init__(self, dirname, thresholds, debug=False):
         self.dirname = dirname
         self.thresholds = thresholds
+        self.debug = debug
         self.entries = []
 
     def loadfile(self, filename):
@@ -62,7 +63,7 @@ class SSSearch:
         if "author" in self.thresholds: threshold += self.thresholds["author"]
         if "title"  in self.thresholds: threshold += self.thresholds["title"]
 
-        for filename in filenames:
+        for filename in tqdm(filenames):
             if not filename.endswith(".json"): continue
             self.loadfile(filename)
             for entry in tqdm(self.entries):
@@ -77,27 +78,27 @@ class SSSearch:
                     if title_dist >= self.thresholds["title"]: continue
                 # check if authors are within threshold
                 if authors and "authors" in entry: # TODO: check each author individually?
-                    auth_dist += (
-                        min([ editdist(
+                    ds = [ editdist(
                                 self.cleanName(auth1["name"]),
                                 self.cleanName(a2))
                             for auth1 in entry["authors"]
-                            for a2 in authors ]))
+                            for a2 in authors ]
+                    if len(ds) == 0: continue
+                    auth_dist += min(ds)
                     if auth_dist >= self.thresholds["author"]: continue
                 # add to possibilities
                 possibles.append(entry)
                 distances.append(year_dist + title_dist + auth_dist)
 
+        if len(possibles)==0: raise Exception("Didn't find semantic scholar query for paper with title '" + title + "'")
+
         # get min
         i_min = 0
-        dist_min = 10000000
-        error = True
+        dist_min = 1 + sum([ v for v in self.thresholds.values() ])
         for i in range(len(distances)):
             d = distances[i]
             if d < dist_min:
-                error = False
                 dist_min = d
                 i_min = i
         
-        if error: raise Exception("Didn't find semantic scholar query for paper with title '" + title + "'")
         return possibles[i_min], dist_min

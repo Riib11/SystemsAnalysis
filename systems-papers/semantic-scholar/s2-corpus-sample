@@ -1,0 +1,45 @@
+{
+  "id": "4cd223df721b722b1c40689caa52932a41fcc223",
+  "title": "Knowledge-rich, computer-assisted composition of Chinese couplets",
+  "paperAbstract": "Recent research effort in poem composition has focused on the use of automatic language generation...",
+  "entities": [
+    "Conformance testing",
+    "Natural language generation",
+    "Natural language processing",
+    "Parallel computing",
+    "Stochastic grammar",
+    "Web application"
+  ],
+  "s2Url": "https://semanticscholar.org/paper/4cd223df721b722b1c40689caa52932a41fcc223",
+  "s2PdfUrl": "",
+  "pdfUrls": [
+    "https://doi.org/10.1093/llc/fqu052"
+  ],
+  "authors": [
+    {
+      "name": "John Lee",
+      "ids": [
+        "3362353"
+      ]
+    },
+    "..."
+  ],
+  "inCitations": [
+    "c789e333fdbb963883a0b5c96c648bf36b8cd242"
+  ],
+  "outCitations": [
+    "abe213ed63c426a089bdf4329597137751dbb3a0",
+    "..."
+  ],
+  "year": 2016,
+  "venue": "DSH",
+  "journalName": "DSH",
+  "journalVolume": "31",
+  "journalPages": "152-163",
+  "sources": [
+    "DBLP"
+  ],
+  "doi": "10.1093/llc/fqu052",
+  "doiUrl": "https://doi.org/10.1093/llc/fqu052",
+  "pmid": ""
+}
