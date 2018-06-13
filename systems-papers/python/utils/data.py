@@ -1,7 +1,7 @@
 import json
 import os
 
-systems_papers_directory = "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/"
+systems_papers_directory = "../../systems-papers/"
 
 data_directory     = systems_papers_directory+"authors/data/"
 authors_directory  = data_directory+"authors/"
@@ -10,6 +10,8 @@ conf_directory     = data_directory+"conf/"
 features_directory = systems_papers_directory+"authors/features/"
 
 papers_directory   = systems_papers_directory + "sys-papers/"
+
+semantic_scholar_dir = "/data/sda/semanticscholar/"
 
 def fileToString(path):
     try:

@@ -108,4 +108,4 @@ def generate(color_attribute):
 
     print("------------------------------------------------")
     print("[%] Writing file:")
-    graph.write("/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/gexf/")
+    graph.write(u_data.systems_papers_directory+"gexf/")

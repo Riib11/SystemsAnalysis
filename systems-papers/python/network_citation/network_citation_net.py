@@ -42,7 +42,7 @@ def generate():
     # search init
     s3 = sssearch.SSSearch(
         # data dir path
-        "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/semantic-scholar/",
+        u_data.semantic_scholar_dir,
         { # thresholds
             "author": 50,
             "title": 50,
@@ -90,4 +90,4 @@ def generate():
 
     print("------------------------------------------------")
     print("[%] Writing file:")
-    graph.write("/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/net/")
+    graph.write(u_data.systems_papers_directory + "net/")

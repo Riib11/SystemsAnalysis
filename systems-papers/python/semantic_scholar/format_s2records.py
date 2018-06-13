@@ -1,8 +1,7 @@
 import os
 import multiprocessing as mp
 from tqdm import tqdm
-
-semantic_scholar_dir = "/data/sda/semanticscholar/"
+from utils.data import semantic_scholar_dir
 
 def formatRecord(fn):
     if not fn.startswith("s2-corpus"): return
@@ -25,10 +24,5 @@ filenames = os.listdir(semantic_scholar_dir)
 
 for fn in tqdm(filenames):
     formatRecord(fn)
-
-# processes = [mp.Process(target=formatRecord, args=(fn,)) for fn in filenames]
-
-# for p in processes: p.start()
-# for p in processes: p.join()
 
 print("Done!")

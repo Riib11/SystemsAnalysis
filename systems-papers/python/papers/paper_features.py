@@ -1,7 +1,7 @@
-import utils.data as data
+import utils.data as u_data
 
 def getBibtex(paper_id):
-    with open(data.papers_directory + paper_id + ".bibtex", 'r') as file:
+    with open(u_data.papers_directory + paper_id + ".bibtex", 'r') as file:
         lines = []
         start = True
         for line in file:
