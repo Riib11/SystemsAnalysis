@@ -11,7 +11,7 @@ features_directory = systems_papers_directory+"authors/features/"
 
 papers_directory   = systems_papers_directory + "sys-papers/"
 
-semantic_scholar_dir = "/data/sda/semanticscholar/"
+semantic_scholar_dir = "/data/sys-papers/semsch/"
 
 def fileToString(path):
     try:
