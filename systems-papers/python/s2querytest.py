@@ -1,11 +1,11 @@
 import utils.shared_utils as utils
-import semantic_scholar.sssearch as sssearch
+import semantic_scholar.s2search as s2search
 from utils.data import semantic_scholar_dir
 
 semantic_scholar_dir = "/data/sda/semanticscholar/"
 # semantic_scholar_dir = "/Users/Henry/Documents/Drive/SystemsAnalysis/systems-papers/semantic-scholar/"
 
-s3 = sssearch.SSSearch(
+s2s = s2search.S2Search(
     semantic_scholar_dir,
     {
         "year"   : 1,
@@ -15,7 +15,7 @@ s3 = sssearch.SSSearch(
     True
 )
 
-result, dist = s3.query(
+result, dist = s2.query(
     ["Svilen Kanev", "Sam Xi", "Gu-Yeon Wei", "David Brooks"],
     "Mallacc: Accelerating Memory Allocation",
     "2017"
