@@ -1,5 +1,9 @@
-import data.shared_utils as utils
+import utils.shared_utils as utils
 from utils.data import semantic_scholar_proccessed_dir
+
+# Divided Raw Data (lists)
+
+makeCitersCnfFn = lambda i: semantic_scholar_proccessed_dir + "citers_cnf" + str(i)
 
 # Raw Data (list)
 
