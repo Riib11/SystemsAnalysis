@@ -4,22 +4,6 @@ import os
 import json
 from tqdm import tqdm
 
-
-def load_json_file(fn, force=True):
-    try:
-        with open(fn, mode="r", encoding='utf-8') as f:
-            return json.load(f)
-    except OSError:
-        print("Couldn't read file ", fn);
-        if force:
-            raise
-        else:
-            return {}
-
-# def createSSDatabase(dirname):
-#     filenames = os.listdir(dirname)
-
-
 # src: https://stackoverflow.com/questions/2460177/edit-distance-in-python
 def editdist(s1, s2):
     if len(s1) > len(s2):
@@ -36,7 +20,7 @@ def editdist(s1, s2):
         distances = distances_
     return distances[-1]
 
-class SSSearch:
+class S2Search:
 
     def __init__(self, dirname, thresholds, debug=False):
         self.dirname = dirname
