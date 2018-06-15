@@ -4,6 +4,7 @@ from utils.data import semantic_scholar_proccessed_dir
 # Divided Raw Data (lists)
 
 makeCitersCnfFn = lambda i: semantic_scholar_proccessed_dir + "citers_cnf" + str(i)
+makeCitedsSecFn = lambda i: semantic_scholar_proccessed_dir + "citeds_sec" + str(i)
 
 # Raw Data (list)
 
