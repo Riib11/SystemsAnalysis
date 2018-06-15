@@ -1,8 +1,10 @@
 import semantic_scholar.s2data as s2data
-import data.shared_utils as utils
+import utils.shared_utils as utils
 
 citersdict = {}
 
+s2data.getCiters()
+quit()
 for c in s2data.getCiters():
     citersdict[ c["id"] ] = c
 
