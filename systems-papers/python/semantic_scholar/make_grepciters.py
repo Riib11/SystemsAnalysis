@@ -18,7 +18,7 @@ for cfn in tqdm(cfns):
     papers = data["papers"]
     for p in papers:
         title = p["title"].replace('"','\\"')
-        grepciters.write('grep -h "'+title +'" ../semantic-scholar/*.json >> citers.json\n')
+        grepciters.write('grep -h -m 1 "'+title +'" '+u_data.semantic_scholar_dir+'*.json >> citers-'+str(i)+'.json'\n')
         grepciters.write('echo "['+str(i)+'/'+str(l)+'] '+title+'"\n')
     i += 1
 
