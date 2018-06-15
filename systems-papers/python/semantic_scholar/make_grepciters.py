@@ -18,12 +18,11 @@ i = 43
 
 cfns = cfns[i:] # already did the first 43
 
-parts = 8                                   # number of partitions
-per_part = math.ceil(len(cfns)/parts)   # processer per partition
-part_i = 0                                  # index of partition
-part_j = 0                                  # index within partition
+per_part = 8                        # processer per partition
+parts = math.ceil(len(cfns)/parts)  # number of partitions
+part_i = 0                          # index of partition
+part_j = 0                          # index within partition
 
-print(per_part)
 
 for cfn in tqdm(cfns):
     
