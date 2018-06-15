@@ -17,7 +17,7 @@ getCiteds = lambda: utils.load_json_file(citeds_fn)
 # Processed data (dict)
 
 citersdict_fn = semantic_scholar_proccessed_dir + "citersdict.json"
-getCitedsDict = lambda: utils.load_json_file(citersdict_fn)
+getCitersDict = lambda: utils.load_json_file(citersdict_fn)
 
 citedsdict_fn = semantic_scholar_proccessed_dir + "citedsdict.json"
 getCitedsDict = lambda: utils.load_json_file(citedsdict_fn)

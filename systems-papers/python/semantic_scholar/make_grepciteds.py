@@ -38,7 +38,7 @@ for grep in tqdm(greps):
         cmd += ' & grep -h'
 
     for cited_id in grep:
-        cmd += " -e '\"id\": \"" + cited_id + "\"'"
+        cmd += " -e '\"id\":\"" + cited_id + "\"'"
 
     cmd += ' ' + u_data.semantic_scholar_dir + 's2-corpus-*.json'
     cmd += ' > ' + s2data.makeCitedsSecFn(i)
