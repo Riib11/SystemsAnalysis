@@ -19,7 +19,7 @@ i = 43
 cfns = cfns[i:] # already did the first 43
 
 per_part = 8                        # processer per partition
-parts = math.ceil(len(cfns)/parts)  # number of partitions
+parts = math.ceil(len(cfns)/per_part)  # number of partitions
 part_i = 0                          # index of partition
 part_j = 0                          # index within partition
 
