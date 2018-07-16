@@ -26,3 +26,16 @@ getCitedsDict = lambda: utils.load_json_file(citedsdict_fn)
 
 citedslist_fn = semantic_scholar_proccessed_dir + "citedslist.json"
 getCitedsList = lambda: utils.load_json_file(citedslist_fn)
+
+# Missing
+
+missing_groupA_fn = semantic_scholar_proccessed_dir + "missing_groupA.json"
+getMissingGroupA = lambda: utils.load_json_file(missing_groupA_fn)
+
+# TODO
+missing_groupB_fn = semantic_scholar_proccessed_dir + "missing_groupB.json"
+getMissingGroupB = lambda: utils.load_json_file(missing_groupB_fn)
+
+
+
+    
