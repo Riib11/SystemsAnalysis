@@ -27,7 +27,7 @@ missing = {}
 
 # loop through titles of papers
 cfns = [ fn for fn in u_data.getConferenceFilenames() ]
-last_i = len(cfns)-1
+last_i = len(cfns) - 1
 
 # start index
 i = 0
@@ -45,4 +45,4 @@ for cfn in tqdm(cfns):
         find = re.search(title, citers_string)
         if find==None: missing[p["title"]] = p
 
-json.dump(missing, open(s2data.missing_groupA_fn,"w+"))
+json.dump(missing, open(s2data."missing_groupA.json","w+"))

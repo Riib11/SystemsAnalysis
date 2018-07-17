@@ -32,7 +32,9 @@ def getJSONFilenames(directory):
     return filter(lambda x : x.endswith(".json") and not x.endswith("template.json"), os.listdir(directory))
 
 def getConferenceFilenames():
-    return getJSONFilenames(data_directory+"conf/")
+    ls = list(getJSONFilenames(conf_directory))
+    if "allConferencePapers.json" in ls: ls.remove("allConferencePapers.json")
+    return ls
 
 # get json file in data/conf
 def getPapers(conf_filename):
@@ -41,3 +43,8 @@ def getPapers(conf_filename):
 # get json file in data/authors
 def getAuthors(conf_filename):
     return getJSONData(authors_directory+conf_filename)
+
+# get combined json of all papers in
+# original conference data
+def getAllConferencePapers():
+    return getJSONData(conf_directory+"allConferencePapers.json")
