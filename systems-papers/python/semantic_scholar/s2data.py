@@ -6,6 +6,8 @@ from utils.data import semantic_scholar_proccessed_dir
 makeCitersCnfFn = lambda i: semantic_scholar_proccessed_dir + "citers_cnf" + str(i)
 makeCitedsSecFn = lambda i: semantic_scholar_proccessed_dir + "citeds_sec" + str(i)
 
+makeGrepMissingGroupAFn = lambda i: semantic_scholar_proccessed_dir + "missingGroupA_part" + str(i)
+
 # Raw Data (list)
 
 citers_fn = semantic_scholar_proccessed_dir + "citers.json"
@@ -35,7 +37,3 @@ getMissingGroupA = lambda: utils.load_json_file(missing_groupA_fn)
 # TODO
 missing_groupB_fn = semantic_scholar_proccessed_dir + "missing_groupB.json"
 getMissingGroupB = lambda: utils.load_json_file(missing_groupB_fn)
-
-
-
-    

@@ -7,6 +7,8 @@ from tqdm import tqdm
 
 # find found papers in Group A that have empty outCitations
 citersdict = s2data.getCitersDict()
+print(citersdict.items()[0])
+quit()
 zeroOutcites = [
     p for p in citersdict.items()
     if (
