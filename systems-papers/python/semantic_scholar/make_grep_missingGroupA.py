@@ -28,7 +28,7 @@ for paper_part_i in range(len(paper_parts)):
         cmd += ' -e "' + paper_title + '"'
 
     cmd += ' ' + u_data.semantic_scholar_dir + 's2-corpus-*.json'
-    cmd += ' > ' + s2data.makeGrepMissingGroupAFn(i)
+    cmd += ' > ' + s2data.makeGrepMissingGroupAFn(paper_part_i)
 
     # write cmd
     file.write(cmd)

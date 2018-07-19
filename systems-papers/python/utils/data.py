@@ -11,7 +11,6 @@ features_directory = systems_papers_directory+"authors/features/"
 
 papers_directory   = systems_papers_directory + "sys-papers/"
 
-
 semantic_scholar_dir = "/data/sys-papers/semsch/"
 semantic_scholar_proccessed_dir = systems_papers_directory + "semantic-scholar/"
 
