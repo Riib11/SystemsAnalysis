@@ -37,3 +37,8 @@ getMissingGroupA = lambda: utils.load_json_file(missing_groupA_fn)
 # TODO
 missing_groupB_fn = semantic_scholar_proccessed_dir + "missing_groupB.json"
 getMissingGroupB = lambda: utils.load_json_file(missing_groupB_fn)
+
+# Missed
+
+missed_outcites_fn = semantic_scholar_proccessed_dir + "missed_outcites.json"
+getMissedOutcites = lambda: utils.load_json_file(missed_outcites_fn)
