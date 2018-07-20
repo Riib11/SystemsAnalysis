@@ -27,3 +27,10 @@ def getDescendantByTagPath(xml, tags, do_except=True):
         return xml
     except Exception as e:
         if do_except: raise e
+
+def XML_to_JSON(xml):
+    return {
+        "tag": xml.tag,
+        "attrib": xml.attrib,
+        "children": [XML_to_JSON for child in xml.getchildren()]
+    }

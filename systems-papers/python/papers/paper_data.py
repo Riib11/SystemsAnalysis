@@ -1,7 +1,14 @@
 import utils.data as data
+import json
 
 def getPaperFilenames_XML():
-    return [ data.paperdata_directory+fn
+    return [ fn
              for fn in os.listdir(data.paperdata_directory)
              if fn.endswith(".cermxml") ]
 
+
+groupA_fn = data.groupA_directory+"A.json"
+def getGroupA(): return json.load(open(groupA_fn))
+
+groupB_fn = data.groupB_directory+"B.json"
+def getGroupB(): return json.load(open(groupB_fn))

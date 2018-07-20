@@ -1,24 +1,21 @@
 import xml.etree.ElementTree as ET
 import os
 from tqdm import tqdm
+import json
 
 import papers.paper_data as paper_data
 import utils.data as data
 import utils.xml as xml
 
-total_citations_count = 0
-total_errors_count = 0
-
+papers_directory = data.papergroups_directory
 papers_filenames = paper_data.getPaperFilenames_XML()
-print("len(papers) =",papers_filenames)
+
+groupA = []
 
 for fn in tqdm(papers_filenames):
-    root = xml.parseXML(fn)
-    try:
-        reflist = xml.getDescendantByTagPath(root, ["back","ref-list"])
-        total_citations_count += len(reflist)
-    except:
-        total_errors_count += 1
+    path = papers_directory + fn
+    root = xml.parseXML(path)
+    j = xml.XML_to_JSON(root)
+    groupA.append(j)
 
-print("total citations count:", total_citations_count)
-print("total errors count:", total_errors_count)
+json.dump(groupA, open(paper_data.groupA_fn, "w+"))
