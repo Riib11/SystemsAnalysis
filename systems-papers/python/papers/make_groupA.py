@@ -7,7 +7,7 @@ import papers.paper_data as paper_data
 import utils.data as data
 import utils.xml as xml
 
-papers_directory = data.data.paperdata_directory
+papers_directory = data.paperdata_directory
 papers_filenames = paper_data.getPaperFilenames_XML()
 
 groupA = []

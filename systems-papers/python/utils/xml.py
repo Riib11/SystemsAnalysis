@@ -32,5 +32,5 @@ def XML_to_JSON(xml):
     return {
         "tag": xml.tag,
         "attrib": xml.attrib,
-        "children": [XML_to_JSON(xml) for child in xml.getchildren()]
+        "children": [XML_to_JSON(child) for child in xml.getchildren()]
     }
