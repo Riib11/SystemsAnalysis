@@ -7,15 +7,21 @@ import papers.paper_data as paper_data
 import utils.data as data
 import utils.xml as xml
 
-papers_directory = data.papergroups_directory
+papers_directory = data.data.paperdata_directory
 papers_filenames = paper_data.getPaperFilenames_XML()
 
 groupA = []
 
 for fn in tqdm(papers_filenames):
     path = papers_directory + fn
-    root = xml.parseXML(path)
-    j = xml.XML_to_JSON(root)
-    groupA.append(j)
+    try:
+        root = xml.parseXML(path)
+        j = xml.XML_to_JSON(root)
+        j["error"] = False
+        j["fn"] = fn
+        groupA.append(j)
+    except:
+        j = {"error":True , "fn":fn}
+        groupA.append(j)
 
 json.dump(groupA, open(paper_data.groupA_fn, "w+"))
