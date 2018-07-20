@@ -1,6 +1,8 @@
 import xml.etree.ElementTree as ET
 import os
+
 import papers.paper_data as paper_data
+import utils.data as data
 import utils.xml as xml
 
 total_citations_count = 0
