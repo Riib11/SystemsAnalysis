@@ -23,7 +23,7 @@ def getChildrenByTag(xml, tag):
 def getDescendantByTagPath(xml, tags, do_except=True):
     try:
         for tag in tags:
-            xml = getChildrenByTag(xml, tag)
+            xml = getChildByTag(xml, tag)
         return xml
     except Exception as e:
         if do_except: raise e
