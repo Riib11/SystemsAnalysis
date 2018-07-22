@@ -1,10 +1,10 @@
 import utils.shared_utils as utils
-from utils.data import semantic_scholar_proccessed_dir
+from utils.data import semantic_scholar_proccessed_dir, semantic_scholar_tmp_dir
 
 # Divided Raw Data (lists)
 
-makeCitersCnfFn = lambda i: semantic_scholar_proccessed_dir + "citers_cnf" + str(i)
-makeCitedsSecFn = lambda i: semantic_scholar_proccessed_dir + "citeds_sec" + str(i)
+makeCitersCnfFn = lambda i: semantic_scholar_tmp_dir + "citers_cnf" + str(i)
+makeCitedsSecFn = lambda i: semantic_scholar_tmp_dir + "citeds_sec" + str(i)
 
 makeGrepMissingGroupAFn = lambda i: semantic_scholar_proccessed_dir + "missingGroupA_part" + str(i)
 
