@@ -24,6 +24,8 @@ parts = math.ceil(len(cfns)/per_part)   # number of partitions
 part_i = 0                              # index within partition
 part_j = 0                              # index of partition
 
+checks = ""
+
 
 for cfn in tqdm(cfns):
     
@@ -51,11 +53,12 @@ for cfn in tqdm(cfns):
     cmd += ' > ' + datafile_fn
 
     # log the files that have problems
-    cmd += '\n\n'
-    cmd += "count=$(wc -l " + datafile_fn + " )\n"
-    cmd += "target='" + str(len(papers)) + "'\n"
-    cmd += "if [ $count != $target ]; then\n"
-    cmd += "  echo " + datafile_fn + " has an incorrect number of results > " + datafile_fn+"_errors " + "\nfi\n"
+    # which is run after all the greps are done
+    checks += '\n\n'
+    checks += "count=$(wc -l " + datafile_fn + " )\n"
+    checks += "target='" + str(len(papers)) + "'\n"
+    checks += "if [ $count != $target ]; then\n"
+    checks += "  echo " + datafile_fn + " has an incorrect number of results > " + datafile_fn+"_errors " + "\nfi\n"
 
     # write cmd
     grepciters.write(cmd)
@@ -67,5 +70,8 @@ for cfn in tqdm(cfns):
     if part_i == per_part:
         part_i = 0
         part_j += 1
+
+
+grepciters.write(checks)
 
 grepciters.close()
