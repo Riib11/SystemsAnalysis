@@ -3,7 +3,7 @@ import utils.data as u_data
 from tqdm import tqdm
 import math
 
-fn_grepciters = u_data.systems_papers_directory+"script/grepciters.sh"
+fn_grepciters = u_data.script_directory+"grepciters.sh"
 
 # script
 grepciters = open(fn_grepciters,"w+")
