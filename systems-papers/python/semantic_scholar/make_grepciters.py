@@ -51,15 +51,14 @@ for cfn in tqdm(cfns):
     cmd += ' > ' + datafile_fn
 
     # log the files that have problems
-    cmd += '\n'
-    cmd += "count=$(wc -l " + datafile_fn + " )"
-    cmd += "target='" + str(len(papers)) + "'"
-    cmd += "if [ $count != $target ]; then "
-    cmd += "echo " + datafile_fn + " has an incorrect number of results > " + datafile_fn+"_errors " + "\nfi\n"
+    cmd += '\n\n'
+    cmd += "count=$(wc -l " + datafile_fn + " )\n"
+    cmd += "target='" + str(len(papers)) + "'\n"
+    cmd += "if [ $count != $target ]; then\n"
+    cmd += "  echo " + datafile_fn + " has an incorrect number of results > " + datafile_fn+"_errors " + "\nfi\n"
 
     # write cmd
     grepciters.write(cmd)
-    print(cmd)
 
     # increment
     i      += 1
