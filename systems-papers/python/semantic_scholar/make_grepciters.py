@@ -3,14 +3,14 @@ import utils.data as u_data
 from tqdm import tqdm
 import math
 
-fn_grepciters = u_data.systems_papers_directory+"script/grepciters.sh"
+fn_grepciters = u_data.script_directory+"grepciters.sh"
 
 # script
 grepciters = open(fn_grepciters,"w+")
 
 # loop through titles of papers
 cfns = [ fn for fn in u_data.getConferenceFilenames() ]
-last_j = 0 # len(cfns)-1
+last_j = 1 # len(cfns)-1
 
 # start index
 i = 0
