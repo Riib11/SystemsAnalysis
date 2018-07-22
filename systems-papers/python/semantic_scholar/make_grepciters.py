@@ -7,6 +7,7 @@ fn_grepciters = u_data.script_directory+"grepciters.sh"
 
 # script
 grepciters = open(fn_grepciters,"w+")
+grepciters.write("#!/bin/bash\n\n")
 
 # loop through titles of papers
 cfns = [ fn for fn in u_data.getConferenceFilenames() ]
@@ -30,7 +31,7 @@ for cfn in tqdm(cfns):
     data = u_data.getPapers(cfn)
     papers = data["papers"]
 
-    cmd = '#!/bin/bash' + '\n'
+    cmd = "\n"
 
     if part_i == 0:
         cmd += 'echo "starting section ' + str(part_j) + '"'
