@@ -10,7 +10,7 @@ grepciters = open(fn_grepciters,"w+")
 
 # loop through titles of papers
 cfns = [ fn for fn in u_data.getConferenceFilenames() ]
-last_j = 0 # len(cfns)-1
+last_j = 1 # len(cfns)-1
 
 # start index
 i = 0
@@ -58,6 +58,7 @@ for cfn in tqdm(cfns):
 
     # write cmd
     grepciters.write(cmd)
+    print(cmd)
 
     # increment
     i      += 1
