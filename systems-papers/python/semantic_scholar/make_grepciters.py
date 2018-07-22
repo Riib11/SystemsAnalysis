@@ -38,7 +38,7 @@ for cfn in tqdm(cfns):
 
     for p in papers:
         title = p["title"].replace("'","\\'")
-        cmd += " -e '\"id\":\"" + title + "\"'"
+        cmd += " -e '\"title\":\"" + title + "\"'"
 
     cmd += ' ' + u_data.semantic_scholar_dir + 's2-corpus-*.json'
 
