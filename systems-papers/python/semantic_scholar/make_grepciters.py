@@ -58,6 +58,7 @@ for cfn in tqdm(cfns):
 
     # write cmd
     grepciters.write(cmd)
+    print(cmd)
 
     # increment
     i      += 1
