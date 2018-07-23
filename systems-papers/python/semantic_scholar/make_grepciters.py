@@ -12,7 +12,7 @@ grepciters.write("#!/bin/bash\n\n")
 # loop through titles of papers
 cfns = [ fn for fn in u_data.getConferenceFilenames() ]
 
-# cfns = cfns[0:1] # already did the first 43
+# cfns = cfns[12:13]
 
 per_part = 1                            # conferences per partition
 parts = math.ceil(len(cfns)/per_part)   # number of partitions
@@ -37,8 +37,8 @@ for cfn in tqdm(cfns):
         cmd += ' & grep -i -h'
 
     for p in papers:
-        title = p["title"].replace("'","\\'")
-        cmd += " -e '\"title\":\"" + title + "\"'"
+        title = p["title"].replace('"','\\"')
+        cmd += " -e " + "\"\\\"title\\\":\\\"" + title + "\\\"\""
 
     cmd += ' ' + u_data.semantic_scholar_dir + 's2-corpus-*.json'
 
@@ -50,7 +50,7 @@ for cfn in tqdm(cfns):
     # log the files that have problems
     # which is run after all the greps are done
     checks += '\n\n'
-    checks += "count=$(wc -l < " + datafile_fn + " )\n"
+    checks += "count=$(wc -l < " + datafile_fn + ")\n"
     checks += "target='" + str(len(papers)) + "'\n"
     checks += "if [ $count != $target ]; then\n"
     checks += "  echo " + datafile_fn + " : target=$target , count=$count > " + datafile_fn+"_errors " + "\nfi\n"

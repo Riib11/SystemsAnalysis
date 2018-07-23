@@ -9,13 +9,13 @@ import utils.xml as xml
 total_citations_count = 0
 total_errors_count = 0
 
-papers_directory = data.papergroups_directory
+papers_directory = "/data/sys-papers/sys-papers/"
 papers_filenames = paper_data.getPaperFilenames_XML()
 print("len(groupA) =",len(papers_filenames))
 
 for fn in tqdm(papers_filenames):
     path = papers_directory + fn
-    root = xml.parseXML(path)
+    root = xml.parseXML(path, do_raise=False)
     try:
         reflist = xml.getDescendantByTagPath(root, ["back","ref-list"])
         total_citations_count += len(reflist)
