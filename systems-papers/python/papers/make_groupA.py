@@ -10,7 +10,7 @@ import utils.xml as xml
 papers_directory = data.paperdata_directory
 papers_filenames = paper_data.getPaperFilenames_XML()
 
-groupA = []
+gA = []
 
 for fn in tqdm(papers_filenames):
     path = papers_directory + fn
@@ -19,9 +19,9 @@ for fn in tqdm(papers_filenames):
         j = xml.XML_to_JSON(root)
         j["error"] = False
         j["fn"] = fn
-        groupA.append(j)
+        gA.append(j)
     except:
         j = {"error":True , "fn":fn}
-        groupA.append(j)
+        gA.append(j)
 
-json.dump(groupA, open(paper_data.groupA_fn, "w+"))
+json.dump(gA, open(paper_data.gA_fn, "w+"))

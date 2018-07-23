@@ -8,8 +8,8 @@ def getPaperFilenames_XML():
              if fn.endswith(".cermxml") ]
 
 
-groupA_fn = data.groupA_directory+"A.json"
+groupA_fn = data.groupA_directory+"gA.json"
 def getGroupA(): return json.load(open(groupA_fn))
 
-groupB_fn = data.groupB_directory+"B.json"
+groupB_fn = data.groupB_directory+"gB.json"
 def getGroupB(): return json.load(open(groupB_fn))
