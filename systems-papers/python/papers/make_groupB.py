@@ -10,12 +10,12 @@ import utils.xml as xml
 papers_directory = data.papergroups_directory
 papers_filenames = paper_data.getPaperFilenames_XML()
 
-groupB = []
+gB = []
 
 for fn in tqdm(papers_filenames):
     path = papers_directory + fn
     root = xml.parseXML(path)
     j = xml.XML_to_JSON(root)
-    groupB.append(j)
+    gB.append(j)
 
-json.dump(groupB, open(paper_data.groupB_fn, "w+"))
+json.dump(gB, open(paper_data.gB_fn, "w+"))
