@@ -4,12 +4,12 @@ import utils.data as u_data
 import math
 from tqdm import tqdm
 
-fn_grep_gB = u_data.systems_papers_directory+"script/grep_gB.sh"
+fn_grep_gB = "../script/grep_gB.sh"
 grep_gB = open(fn_grep_gB,"w+")
 grep_gB.write("#!/bin/bash\n\n")
 
 # list of cited ids
-list_gB = s2data.getList_gB()
+list_gB = s2data.get_list_gB()
 
 # organize into grep-sections
 per_grep = 20
@@ -28,12 +28,13 @@ parts_n = math.ceil(greps_n/per_part)
 part_i = 0 # index of partition
 part_j = 0 # index within partition
 
+i = 0
 for grep in tqdm(greps):
 
     cmd = ''
 
     if part_i == 0:
-        cmd += '\n\nnohup echo "starting section ' + str(part_j) + '"'
+        cmd += '\necho "starting section ' + str(i) + '"'
         cmd += ' & grep -h'
     else:
         cmd += ' & grep -h'
