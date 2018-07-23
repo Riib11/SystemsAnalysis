@@ -23,7 +23,7 @@ for pid in tqdm(list_gB):
     if i == per_grep: i = 0
 
 # organize into parallel parts
-per_part = 8
+per_part = 1
 parts_n = math.ceil(greps_n/per_part)
 part_i = 0 # index of partition
 part_j = 0 # index within partition
