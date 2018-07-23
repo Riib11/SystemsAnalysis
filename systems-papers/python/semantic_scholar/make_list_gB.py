@@ -4,13 +4,13 @@ from itertools import chain
 from tqdm import tqdm
 
 # set of ids
-cited_ids = set({})
-for c in tqdm(s2data.getCiters()):
+ids = set({})
+for c in tqdm(s2data.get_gA()):
     # get the id's of the citeds
-    cited_ids = set(chain(c["outCitations"],cited_ids))
+    if "outCitations" in c: ids = set(chain(c["outCitations"],ids))
 
 # convert back to list
-cited_ids = list(cited_ids)
+ids = list(ids)
 
 # save
-utils.save_json_file( s2data.citedslist_fn , cited_ids )
+utils.save_json_file( s2data.list_gB_fn , ids )
