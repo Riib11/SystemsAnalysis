@@ -3,11 +3,11 @@ import utils.data as u_data
 from tqdm import tqdm
 import math
 
-fn_grepciters = u_data.script_directory+"grepciters.sh"
+fn_grep_gA = u_data.script_directory+"grep_gA.sh"
 
 # script
-grepciters = open(fn_grepciters,"w+")
-grepciters.write("#!/bin/bash\n\n")
+grep_gA = open(fn_grep_gA,"w+")
+grep_gA.write("#!/bin/bash\n\n")
 
 # loop through titles of papers
 cfns = [ fn for fn in u_data.getConferenceFilenames() ]
@@ -42,7 +42,7 @@ for cfn in tqdm(cfns):
 
     cmd += ' ' + u_data.semantic_scholar_dir + 's2-corpus-*.json'
 
-    datafile_fn = s2data.makeCitersCnfFn(i)
+    datafile_fn = s2data.make_grep_gA_cnf_fn(i)
 
     # write finds to file
     cmd += ' > ' + datafile_fn
@@ -56,7 +56,7 @@ for cfn in tqdm(cfns):
     checks += "  echo " + datafile_fn + " : target=$target , count=$count > " + datafile_fn+"_errors " + "\nfi\n"
 
     # write cmd
-    grepciters.write(cmd)
+    grep_gA.write(cmd)
 
     # increment
     i      += 1
@@ -66,6 +66,6 @@ for cfn in tqdm(cfns):
         part_j += 1
 
 
-grepciters.write(checks)
+grep_gA.write(checks)
 
-grepciters.close()
+grep_gA.close()

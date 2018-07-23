@@ -4,20 +4,21 @@ import utils.data as u_data
 import math
 from tqdm import tqdm
 
-fn_grepciteds = u_data.systems_papers_directory+"script/grepciteds.sh"
-grepciteds = open(fn_grepciteds,"w+")
+fn_grep_gB = u_data.systems_papers_directory+"script/grep_gB.sh"
+grep_gB = open(fn_grep_gB,"w+")
+grep_gB.write("#!/bin/bash\n\n")
 
 # list of cited ids
-citedslist = s2data.getCitedsList()
+list_gB = s2data.getList_gB()
 
 # organize into grep-sections
-per_grep = 100
-greps_n = math.ceil(len(citedslist)/per_grep)
+per_grep = 20
+greps_n = math.ceil(len(list_gB)/per_grep)
 greps = []
 i = 0
-for cited_id in tqdm(citedslist):
+for pid in tqdm(list_gB):
     if i == 0: greps.append([])
-    greps[-1].append(cited_id)
+    greps[-1].append(pid)
     i += 1
     if i == per_grep: i = 0
 
@@ -32,18 +33,18 @@ for grep in tqdm(greps):
     cmd = ''
 
     if part_i == 0:
-        cmd += '\n\nnohup echo "starting setion ' + str(part_j) + '"'
+        cmd += '\n\nnohup echo "starting section ' + str(part_j) + '"'
         cmd += ' & grep -h'
     else:
         cmd += ' & grep -h'
 
-    for cited_id in grep:
-        cmd += " -e '\"id\":\"" + cited_id + "\"'"
+    for pid in grep:
+        cmd += " -e " + "\"" + "\\\"id\\\"" + ":" + "\\\"" + pid + "\\\"" + "\""
 
     cmd += ' ' + u_data.semantic_scholar_dir + 's2-corpus-*.json'
-    cmd += ' > ' + s2data.makeCitedsSecFn(i)
+    cmd += ' > ' + s2data.make_grep_gB_sec_fn(i)
 
-    grepciteds.write(cmd)
+    grep_gB.write(cmd)
 
     # increment
     i      += 1

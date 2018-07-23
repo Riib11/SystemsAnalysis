@@ -3,42 +3,41 @@ from utils.data import semantic_scholar_proccessed_dir, semantic_scholar_tmp_dir
 
 # Divided Raw Data (lists)
 
-makeCitersCnfFn = lambda i: semantic_scholar_tmp_dir + "citers_cnf" + str(i)
-makeCitedsSecFn = lambda i: semantic_scholar_tmp_dir + "citeds_sec" + str(i)
-
-makeGrepMissingGroupAFn = lambda i: semantic_scholar_proccessed_dir + "missingGroupA_part" + str(i)
+make_grep_gA_cnf_fn = lambda i: semantic_scholar_tmp_dir + "gA_cfn_" + str(i)
+make_grep_gB_sec_fn = lambda i: semantic_scholar_tmp_dir + "gB_sec_" + str(i)
+make_grep_gA_mis_fn = lambda i: semantic_scholar_tmp_dir + "gA_missing_" + str(i)
 
 # Raw Data (list)
 
-citers_fn = semantic_scholar_proccessed_dir + "citers.json"
-getCiters = lambda: utils.load_json_file(citers_fn)
+gA_fn = semantic_scholar_proccessed_dir + "gA.json"
+get_gA = lambda: utils.load_json_file(gA_fn)
 
-citeds_fn = semantic_scholar_proccessed_dir + "citeds.json"
-getCiteds = lambda: utils.load_json_file(citeds_fn)
+gB_fn = semantic_scholar_proccessed_dir + "gB.json"
+get_gB = lambda: utils.load_json_file(gB_fn)
 
 # Processed data (dict)
 
-citersdict_fn = semantic_scholar_proccessed_dir + "citersdict.json"
-getCitersDict = lambda: utils.load_json_file(citersdict_fn)
+dict_gA_fn = semantic_scholar_proccessed_dir + "dict_gA.json"
+get_dict_gA = lambda: utils.load_json_file(dict_gA_fn)
 
-citedsdict_fn = semantic_scholar_proccessed_dir + "citedsdict.json"
-getCitedsDict = lambda: utils.load_json_file(citedsdict_fn)
+dict_gB_fn = semantic_scholar_proccessed_dir + "dict_gB.json"
+get_dict_gB = lambda: utils.load_json_file(dict_gB_fn)
 
 # Just Ids (list)
 
-citedslist_fn = semantic_scholar_proccessed_dir + "citedslist.json"
-getCitedsList = lambda: utils.load_json_file(citedslist_fn)
+list_gB_fn = semantic_scholar_proccessed_dir + "list_gB.json"
+get_list_gB = lambda: utils.load_json_file(list_gB_fn)
 
 # Missing
 
-missing_groupA_fn = semantic_scholar_proccessed_dir + "missing_groupA.json"
-getMissingGroupA = lambda: utils.load_json_file(missing_groupA_fn)
+missing_gA_fn = semantic_scholar_proccessed_dir + "missing_gA.json"
+get_missing_gA = lambda: utils.load_json_file(missing_gA_fn)
 
 # TODO
-missing_groupB_fn = semantic_scholar_proccessed_dir + "missing_groupB.json"
-getMissingGroupB = lambda: utils.load_json_file(missing_groupB_fn)
+missing_gB_fn = semantic_scholar_proccessed_dir + "missing_gB.json"
+get_missing_gB = lambda: utils.load_json_file(missing_gB_fn)
 
 # Missed
 
 missed_outcites_fn = semantic_scholar_proccessed_dir + "missed_outcites.json"
-getMissedOutcites = lambda: utils.load_json_file(missed_outcites_fn)
+get_missed_outcites = lambda: utils.load_json_file(missed_outcites_fn)
