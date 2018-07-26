@@ -42,7 +42,7 @@ for cfn in tqdm(cfns):
 
     for p in papers:
         title = p["title"].replace('"','\\"')
-        string = "\"title\":\""++title++"\""
+        string = "'title': '"++title++"'"
         string = re.escape(string)
         find = re.search(string, gA_string)
         if find==None: missing[p["title"]] = p
