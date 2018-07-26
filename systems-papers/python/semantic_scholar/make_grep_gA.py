@@ -11,7 +11,6 @@ grep_gA.write("#!/bin/bash\n\n")
 
 # loop through titles of papers
 cfns = [ fn for fn in u_data.getConferenceFilenames() ]
-
 # cfns = cfns[12:13]
 
 per_part = 1                            # conferences per partition
@@ -53,7 +52,7 @@ for cfn in tqdm(cfns):
     checks += "count=$(wc -l < " + datafile_fn + ")\n"
     checks += "target='" + str(len(papers)) + "'\n"
     checks += "if [ $count != $target ]; then\n"
-    checks += "  echo " + datafile_fn + " : target=$target , count=$count > " + datafile_fn+"_errors " + "\nfi\n"
+    checks += "  echo " + datafile_fn + " : target for " + data["key"] + " = $target , count=$count > " + datafile_fn+"_errors " + "\nfi\n"
 
     # write cmd
     grep_gA.write(cmd)
