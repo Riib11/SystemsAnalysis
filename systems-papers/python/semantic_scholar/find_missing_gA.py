@@ -16,8 +16,8 @@ import json
 # faster to grep it for titles
 #
 
-citersdict = s2data.getCitersDict()
-citers_string = str(citers)
+gA_dict = s2data.get_dict_gA()
+gA_string = str(gA_dict)
 
 #
 # search for all the papers
@@ -42,7 +42,9 @@ for cfn in tqdm(cfns):
 
     for p in papers:
         title = p["title"].replace('"','\\"')
-        find = re.search(title, citers_string)
+        string = "\"title\":\""++title++"\""
+        string = re.escape(string)
+        find = re.search(string, gA_string)
         if find==None: missing[p["title"]] = p
 
 json.dump(missing, open(u_data.semantic_scholar_proccessed_dir+"missing_gA.json","w+"))
