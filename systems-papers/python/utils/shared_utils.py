@@ -56,7 +56,7 @@ def author_uname(name, features):
     i = len(features)//2 # index
     s = len(features)//4 # step
     n = features[i]['name'] # current name
-    gs_email = "_"
+    gs_email = ""
     end = False
     while n != name and s != 0:
         # go right
@@ -70,7 +70,8 @@ def author_uname(name, features):
         if n == name:
             gs_email = features[i]["gs_email"]
             break
-    return name+" : "+gs_email
+    if gs_email.lower() == "missing": gs_email = ""
+    return name+" "+gs_email
 
 ##############################################################################
 # normalize_author_name(): break an author string to a name and (optional)

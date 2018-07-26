@@ -36,6 +36,8 @@ class NET:
         for (label, node) in self.nodes.items():
             s = str(node["id"]) + " " # id
             s += "\"" + label + "\"" # label
+            # attributes
+            # for k,v in node["attributes"].items(): s += " "+str(k)+" "+str(v)
             file.write(s+"\n")
 
         # edges header

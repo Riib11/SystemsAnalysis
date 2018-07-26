@@ -45,4 +45,4 @@ for cfn in tqdm(cfns):
         find = re.search(title, citers_string)
         if find==None: missing[p["title"]] = p
 
-json.dump(missing, open(u_data.semantic_scholar_proccessed_dir+"missing_groupA.json","w+"))
+json.dump(missing, open(u_data.semantic_scholar_proccessed_dir+"missing_gA.json","w+"))
