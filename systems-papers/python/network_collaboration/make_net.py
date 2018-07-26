@@ -32,16 +32,22 @@ from net.net import NET
 import utils.data as u_data
 import authors.author_features as a_features
 
+directory = u_data.systems_papers_directory+"net/"
+
 def generate(color_attribute):
 
     # graph
-    graph = NET("network_collaboration_net-"+color_attribute)
+    graph = NET("collaboration_net"+"_color="+color_attribute)
 
     # color attribute for each author
     color_attribute_dict = a_features.getAllAuthorsAttribute(color_attribute)
     color_attribute_dict_values = [ hind for hind in color_attribute_dict.values() ]
     color_attribute_min = min(color_attribute_dict_values)
     color_attribute_max = max(color_attribute_dict_values)
+    with open(directory+graph.name+"_attributes.txt", "w+") as file:
+        file.write("name hindex\n")
+        for a_name, hind in color_attribute_dict.items():
+            file.write("\""+a_name+"\""+" "+str(hind)+"\n")
     # print statisics:
     print("------------------------------------------------")
     print(color_attribute + " statistics:")
@@ -88,7 +94,7 @@ def generate(color_attribute):
                         val = color_attribute_dict[an]
                         vals.append(val)
                         a_attrs[color_attribute] = val
-                        a_attrs["color"]  = colorAttributeToColor(val)
+                        # a_attrs["color"] = colorAttributeToColor(val)
                     # add node to graph
                     graph.addNode(au, a_attrs)
                 # add edge to graph
@@ -100,4 +106,4 @@ def generate(color_attribute):
 
     print("------------------------------------------------")
     print("[%] Writing file:")
-    graph.write(u_data.systems_papers_directory+"net/")
+    graph.write(directory)
