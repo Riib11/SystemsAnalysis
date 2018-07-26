@@ -41,10 +41,10 @@ for cfn in tqdm(cfns):
     papers = data["papers"]
 
     for p in papers:
-        title = p["title"].replace('"','\\"')
-        string = "\"title\":\""++title++"\""
+        title = p["title"]
+        string = "'title': '"+title+"'"
         string = re.escape(string)
-        find = re.search(string, gA_string)
+        find = re.search(string, gA_string, re.IGNORECASE)
         if find==None: missing[p["title"]] = p
 
-json.dump(missing, open(u_data.semantic_scholar_proccessed_dir+"missing_gA.json","w+"))
+json.dump(missing, open(s2data.missing_gA_fn,"w+"))
