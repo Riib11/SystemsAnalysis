@@ -4,9 +4,9 @@ import utils.data as u_data
 import math
 from tqdm import tqdm
 
-fn_grep_gB = "../script/grep_gB.sh"
-grep_gB = open(fn_grep_gB,"w+")
-grep_gB.write("#!/bin/bash\n\n")
+# fn_grep_gB = "../script/grep_gB.sh"
+# grep_gB = open(fn_grep_gB,"w+")
+# grep_gB.write("#!/bin/bash\n\n")
 
 # list of cited ids
 list_gB = s2data.get_list_gB()
@@ -14,6 +14,9 @@ list_gB = s2data.get_list_gB()
 # organize into grep-sections
 per_grep = 20
 greps_n = math.ceil(len(list_gB)/per_grep)
+print(greps_n)
+quit()
+
 greps = []
 i = 0
 for pid in tqdm(list_gB):
