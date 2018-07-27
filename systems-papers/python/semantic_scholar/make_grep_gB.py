@@ -4,9 +4,9 @@ import utils.data as u_data
 import math
 from tqdm import tqdm
 
-# fn_grep_gB = "../script/grep_gB.sh"
-# grep_gB = open(fn_grep_gB,"w+")
-# grep_gB.write("#!/bin/bash\n\n")
+fn_grep_gB = "../script/grep_gB.sh"
+grep_gB = open(fn_grep_gB,"w+")
+grep_gB.write("#!/bin/bash\n\n")
 
 # list of cited ids
 list_gB = s2data.get_list_gB()
@@ -14,8 +14,6 @@ list_gB = s2data.get_list_gB()
 # organize into grep-sections
 per_grep = 20
 greps_n = math.ceil(len(list_gB)/per_grep)
-print(greps_n)
-quit()
 
 greps = []
 i = 0
@@ -32,23 +30,26 @@ part_i = 0 # index of partition
 part_j = 0 # index within partition
 
 i = 0
+i_start = 588
 for grep in tqdm(greps):
 
     cmd = ''
 
-    if part_i == 0:
-        cmd += '\necho "starting section ' + str(i) + '"'
-        cmd += ' & grep -h'
-    else:
-        cmd += ' & grep -h'
+    if i >= i_start:
 
-    for pid in grep:
-        cmd += " -e " + "\"" + "\\\"id\\\"" + ":" + "\\\"" + pid + "\\\"" + "\""
+        if part_i == 0:
+            cmd += '\necho "starting section ' + str(i) + '"'
+            cmd += ' & grep -h'
+        else:
+            cmd += ' & grep -h'
 
-    cmd += ' ' + u_data.semantic_scholar_dir + 's2-corpus-*.json'
-    cmd += ' > ' + s2data.make_grep_gB_sec_fn(i)
+        for pid in grep:
+            cmd += " -e " + "\"" + "\\\"id\\\"" + ":" + "\\\"" + pid + "\\\"" + "\""
 
-    grep_gB.write(cmd)
+        cmd += ' ' + u_data.semantic_scholar_dir + 's2-corpus-*.json'
+        cmd += ' > ' + s2data.make_grep_gB_sec_fn(i)
+
+        grep_gB.write(cmd)
 
     # increment
     i      += 1
