@@ -22,9 +22,12 @@ from tqdm import tqdm
 # modules
 from gexf.gexf import GEXF
 import utils.data as u_data
-import papers.paper_features as p_features
+import semantic_scholar.s2data as s2data
 
 def generate():
+
+    ################################################################
+    print("[#] Initializing GEXF")
     
     # graph init
     graph = GEXF("network_citation")
@@ -33,35 +36,34 @@ def generate():
     # attributes
     graph.addAttribute( "node", "conference" , "string", "" )
     graph.addAttribute( "node", "title"      , "string", "" )
+    graph.addAttribute( "node", "year"      , "string", "" )
+
 
     # TODO: color attribute for each paper
     # TODO: print statisics:
 
-    # iterate through papers
-    conf_filenames = [ fn for fn in u_data.getConferenceFilenames() ]
-    conf_filenames = conf_filenames[:10]
+    ################################################################
+    print("[#] Loading Data:")
+    
+    gB = s2data.get_dict_gB()
 
-    print("------------------------------------------------")
+    ################################################################
     print("[#] Analyzing Data:")
-    for conf_filename in tqdm(conf_filenames):
-        conf_name = conf_filename.replace(".json","")
-        data = u_data.getPapers(conf_filename)
-        papers = data['papers']
-        for paper in papers:
-            key = paper["key"]
-            title = paper["title"]
-            graph.addNode(key, {
-                "conference" : conf_name,
-                "title"      : title
-            })
-            e_id = key
-            uid_suffix = 0
-            for title in p_features.getCitationsTitles(key):
-                graph.addNode(title, { "title":title })
-                graph.addEdge(e_id+str(uid_suffix), key, title, 1)
-                uid_suffix += 1
 
+    def safeindex(d,k):
+        return d[k] if k in d else "MISSING"
+    
+    for id, paper in gB:
+        graph.addNode(
+            id, {
+            "title"      : safeindex(paper,"title"),
+            "conference" : safeindex(paper,"venue"),
+            "year"       : str(safeindex(paper,"year"))
+        })
+        for out_id in paper["outCitations"]:
+            graph.addEdge(id, out_id, safeindex(paper,"title"), 1)
 
-    print("------------------------------------------------")
-    print("[%] Writing file:")
+    ################################################################
+    print("[#] Writing file:")
+
     graph.write(u_data.systems_papers_directory + "gexf/")
