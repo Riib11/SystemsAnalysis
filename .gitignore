@@ -2,7 +2,5 @@ systems-papers/authors
 systems-papers/sys-papers
 systems-papers/semantic-scholar
 systems-papers/python/utils/data.py
-systems-papers/net
-systems-papers/gexf
 __pycache__
 .pyc
