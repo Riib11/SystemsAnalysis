@@ -30,7 +30,7 @@ def generate():
     print("[#] Initializing GEXF")
     
     # graph init
-    graph = GEXF("network_citation")
+    graph = GEXF("citations_authors")
     # parameters
     graph.setParameter("graph", "defaultedgetype", "directed")
     # attributes
@@ -53,7 +53,7 @@ def generate():
     def safeindex(d,k):
         return d[k] if k in d else "MISSING"
     
-    for id, paper in gB:
+    for id, paper in gB.items():
         graph.addNode(
             id, {
             "title"      : safeindex(paper,"title"),
@@ -61,9 +61,11 @@ def generate():
             "year"       : str(safeindex(paper,"year"))
         })
         for out_id in paper["outCitations"]:
-            graph.addEdge(id, out_id, safeindex(paper,"title"), 1)
+            graph.addEdge(safeindex(paper,"title"), id, out_id, 1)
 
     ################################################################
     print("[#] Writing file:")
 
-    graph.write(u_data.systems_papers_directory + "gexf/")
+    graph.write("/home/blancheh/SystemsAnalysis/systems-papers/gexf/")
+
+generate()
