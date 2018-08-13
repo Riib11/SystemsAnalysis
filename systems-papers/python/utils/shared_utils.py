@@ -251,3 +251,4 @@ def set_author_stats(prop, record, names, accessor):
 
     record['lead_' + prop] = values[0]
     record['last_' + prop] = values[-1]
+
