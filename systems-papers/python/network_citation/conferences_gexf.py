@@ -65,6 +65,7 @@ def generate():
         # source node
         source_conf = conf_utils.normalize_conference(
             source_paper["venue"])
+        if len(source_conf) == 0: continue
         addNode_safe(source_conf)
 
         # for each outcite
@@ -77,7 +78,8 @@ def generate():
             # target node
             target_conf = conf_utils.normalize_conference(
                 gB[target_id]["venue"])
-            addNode_safe(target_conf)
+            if len(target_conf) == 0: continue
+            addNode_safe(target_conf) 
             
             # edge
             graph.addEdge(str(edge_id), source_conf, target_conf)
