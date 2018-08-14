@@ -45,7 +45,7 @@ def generate():
     ################################################################
     print("[#] Loading Data:")
     
-    gB = s2data.get_dict_gB()
+    gA = s2data.get_dict_gA()
 
     ################################################################
     print("[#] Analyzing Data:")
@@ -53,7 +53,7 @@ def generate():
     def safeindex(d,k):
         return d[k] if k in d else "MISSING"
     
-    for id, paper in gB.items():
+    for id, paper in gA.items():
         graph.addNode(
             id, {
             "title"      : safeindex(paper,"title"),
