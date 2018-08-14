@@ -52,15 +52,30 @@ def generate():
     ################################################################
     print("[#] Analyzing Data:")
 
+    conferences = []
     edge_id = 0
+
+    def addNode_safe(conf):
+        if not conf in conferences:
+            graph.addNode(conf, {})
+            conferences.append(conf)
+
     for source_id, source_paper in gA.items():
+        
+        # source node
         source_conf = conf_utils.normalize_conference(
             source_paper["venue"])
-        graph.addNode(source_id, {})
+        addNode_safe(source_conf)
+
+        # for each outcite
         for target_id in source_paper["outCitations"]
+            
+            # target node
             target_conf = normalize_conference(
                 gB[target_id]["venue"])
-            graph.addNode(target_id, {})
+            addNode_safe(target_conf)
+            
+            # edge
             graph.addEdge(str(edge_id), source_conf, target_conf)
             edge_id += 1
 
