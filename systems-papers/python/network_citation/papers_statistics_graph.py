@@ -68,7 +68,7 @@ data = np.array(gA_statistics["outCitations"])
 data = data / data.max() # normalize
 ax.hist(data , bins=n_bins)
 # TODO
-ax.vlines(x, ymin, ymax, colors='k', linestyles='solid', label='', *, data=None, **kwargs)
+# ax.vlines(x, ymin, ymax, colors='k', linestyles='solid', label='', *, data=None, **kwargs)
 # x : scalar or 1D array_like
 # x-indexes where to plot the lines.
 # ymin, ymax : scalar or 1D array_like
