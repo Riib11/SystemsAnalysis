@@ -5,7 +5,6 @@ Creates a network of conference citations.
 - Info:
 
     - Nodes represent a conference
-
     - Edges are directed and one weight point represents one paper in a conference citing another paper in another conference
 
 """
@@ -31,7 +30,7 @@ def generate():
     print("[#] Initializing GEXF")
     
     # graph init
-    graph = GEXF("citations_authors")
+    graph = GEXF("citations_conferences")
     # parameters
     graph.setParameter("graph", "defaultedgetype", "directed")
     # attributes
@@ -54,6 +53,7 @@ def generate():
 
     conferences = []
     edge_id = 0
+    missing_count = 0
 
     def addNode_safe(conf):
         if not conf in conferences:
@@ -68,16 +68,22 @@ def generate():
         addNode_safe(source_conf)
 
         # for each outcite
-        for target_id in source_paper["outCitations"]
+        for target_id in source_paper["outCitations"]:
             
+            if not target_id in gB:
+                missing_count += 1
+                continue
+
             # target node
-            target_conf = normalize_conference(
+            target_conf = conf_utils.normalize_conference(
                 gB[target_id]["venue"])
             addNode_safe(target_conf)
             
             # edge
             graph.addEdge(str(edge_id), source_conf, target_conf)
             edge_id += 1
+
+    print("[>] missing count:",missing_count)
 
     ################################################################
     print("[#] Writing file:")

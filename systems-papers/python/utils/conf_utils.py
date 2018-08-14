@@ -45,4 +45,3 @@ def normalize_conference(x):
 
     return x
 
-print(normalize_conference( "SIGIR" ))

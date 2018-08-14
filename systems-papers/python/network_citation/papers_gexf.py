@@ -30,7 +30,7 @@ def generate():
     print("[#] Initializing GEXF")
     
     # graph init
-    graph = GEXF("citations_authors")
+    graph = GEXF("citations_papers")
     # parameters
     graph.setParameter("graph", "defaultedgetype", "directed")
     # attributes
