@@ -34,9 +34,9 @@ def generate():
     # parameters
     graph.setParameter("graph", "defaultedgetype", "directed")
     # attributes
-    # graph.addAttribute( "node", "conference" , "string", "" )
-    # graph.addAttribute( "node", "title"      , "string", "" )
-    # graph.addAttribute( "node", "year"      , "string", "" )
+    graph.addAttribute( "node" , "outCitations"  , "float"  , "0.0" )
+    graph.addAttribute( "node" , "selfCitations" , "float"  , "0.0" )
+    graph.addAttribute( "node" , "color"         , "string" , "0000FF" )
 
 
     # TODO: color attribute for each paper
@@ -51,45 +51,65 @@ def generate():
     ################################################################
     print("[#] Analyzing Data:")
 
-    conferences = []
-    edge_id = 0
-    missing_count = 0
+    # { conference : [selfCitation, outCitations] }
+    conferences = {}
 
-    def addNode_safe(conf):
-        if not conf in conferences:
-            graph.addNode(conf, {})
-            conferences.append(conf)
+    def safeindex(d,k):
+        if not k in d: d[k] = [0,0]
+        return d[k]
 
-    for source_id, source_paper in gA.items():
-        
-        # source node
-        source_conf = conf_utils.normalize_conference(
-            source_paper["venue"])
-        if len(source_conf) == 0: continue
-        addNode_safe(source_conf)
-
-        # for each outcite
-        for target_id in source_paper["outCitations"]:
-            
-            if not target_id in gB:
-                missing_count += 1
-                continue
-
-            # target node
-            target_conf = conf_utils.normalize_conference(
-                gB[target_id]["venue"])
-            if len(target_conf) == 0: continue
-            addNode_safe(target_conf) 
-            
-            # edge
-            graph.addEdge(str(edge_id), source_conf, target_conf)
-            edge_id += 1
-
-    print("[>] missing count:",missing_count)
+    for id, paper in gA.items():
+        conf = conf_utils.normalize_conference(
+            paper["venue"])
+        if len(conf) == 0: continue
+        for target_id in paper["outCitations"]:
+            try:
+                target_paper = gB[target_id]
+                target_conf = conf_utils.normalize_conference(
+                    target_paper["venue"])
+                if len(target_conf) == 0: continue
+                if conf == target_conf:
+                    safeindex(conferences,conf)[0] += 1
+                else:
+                    safeindex(conferences,conf)[1] += 1
+            except: pass
 
     ################################################################
     print("[#] Writing file:")
 
-    graph.write("/home/blancheh/SystemsAnalysis/systems-papers/gexf/")
+    selfCitations_list = [ conferences[k][0] for k in conferences.keys() ]
+    color_attribute_min = min(selfCitations_list)
+    color_attribute_max = max(selfCitations_list)
+
+    def colorAttributeToColor(val):
+        norm = (val - color_attribute_min) / color_attribute_max
+        return u_colors.RGBToHexColor(norm, 0.0, 1-norm)
+
+    # nodes
+    for conf, citations in conferences.items():
+        graph.addNode(conf, {
+            "selfCitations" : str(citations[0]),
+            "outCitations"  : str(citations[1]),
+            "color"         : colorAttributeToColor(citations[0])
+        })
+
+    # edges (only between members of gA)
+    for id, paper in gA.items():
+        conf = conf_utils.normalize_conference(
+            paper["venue"])
+        if len(conf) == 0: continue
+        for target_id in paper["outCitations"]:
+            try:
+                target_paper = gB[target_id]
+                target_conf = conf_utils.normalize_conference(
+                    target_paper["venue"])
+                if len(target_conf) == 0: continue
+                # paper in gA
+                if target_conf in conferences and conf != target_conf:
+                    graph.addEdge(id, conf, target_conf)
+            except: pass
+
+
+    graph.write("../gexf/")
 
 generate()
