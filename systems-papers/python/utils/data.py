@@ -21,7 +21,7 @@ script_directory   = "../script/"
 paperdata_directory = "/home/blancheh/"
 
 semantic_scholar_dir            = paperdata_directory + "semsch/"
-semantic_scholar_proccessed_dir = semantic_scholar_dir + "processed/"
+semantic_scholar_proccessed_dir = "../../data/"
 semantic_scholar_tmp_dir        = semantic_scholar_dir + "tmp/"
 
 papergroups_directory = paperdata_directory + "papers/"

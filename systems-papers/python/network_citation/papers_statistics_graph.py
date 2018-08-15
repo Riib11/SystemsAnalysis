@@ -9,6 +9,7 @@
 # utilities
 import sys
 import os
+import json
 import numpy as np
 import utils.shared_utils as utils
 import utils.conf_utils as conf_utils
@@ -29,63 +30,58 @@ np.random.seed(19680801)
 ################################################################
 print("[#] Loading Data:")
 
-gA = s2data.get_dict_gA()
-gB = s2data.get_dict_gB()
-
-################################################################
-print("[#] Analyzing gA Data:")
-
-gA_statistics = {
-    "outCitations": []
-}
- 
-for paper in tqdm(gA.values()):
-    # citation count
-    outcites = len(paper["outCitations"])
-    gA_statistics["outCitations"].append(outcites)
-
-################################################################
-print("[#] Analyzing gA Data:")
-
-gB_statistics = {
-    "inCitations": [],
-    "years": []
-}
-
-for paper in tqdm(gB.values()):
-    # citation count
-    incites = len(paper["inCitations"])
-    gB_statistics["inCitations"].append(incites)
-    # years
-    if "year" in paper: gB_statistics["years"].append(paper["year"])
+statistics = json.load(open("../statistics/papers_statistics.json"))
+gA_statistics = statistics["gA"]
+gB_statistics = statistics["gB"]
 
 ################################################################
 print("[#] Writing Results:")
 
-# gA : outCitations
-fig, ax = plt.subplots(tight_layout=True)
-data = np.array(gA_statistics["outCitations"])
-data = data / data.max() # normalize
-ax.hist(data , bins=n_bins)
-# TODO
-# ax.vlines(x, ymin, ymax, colors='k', linestyles='solid', label='', *, data=None, **kwargs)
-# x : scalar or 1D array_like
-# x-indexes where to plot the lines.
-# ymin, ymax : scalar or 1D array_like
-# Respective beginning and end of each line. If scalars are provided, all lines will have same length.
-# colors : array_like of colors, optional, default: 'k'
-# linestyles : ['solid' | 'dashed' | 'dashdot' | 'dotted'], optional
-# label : string, optional, default: ''
+if False:
+    # gA : outCitations
+    fig, ax = plt.subplots(tight_layout=True)
+    data = np.array(gA_statistics["outCitations"])
+    ax.hist(data , bins=100)
+    plt.title("Distribution of outCitations in Group A")
+    plt.xlabel("number of outCitations")
+    plt.ylabel("frequency")
+    plt.show()
+    # TODO
+    # ax.vlines(x, ymin, ymax, colors='k', linestyles='solid', label='', *, data=None, **kwargs)
+    # x : scalar or 1D array_like
+    # x-indexes where to plot the lines.
+    # ymin, ymax : scalar or 1D array_like
+    # Respective beginning and end of each line. If scalars are provided, all lines will have same length.
+    # colors : array_like of colors, optional, default: 'k'
+    # linestyles : ['solid' | 'dashed' | 'dashdot' | 'dotted'], optional
+    # label : string, optional, default: ''
 
-plt.show()
-quit()
+if False:
+    # gB : inCitationsRate
+    fig, ax = plt.subplots(tight_layout=True)
+    data = np.array(gB_statistics["inCitationsRate"])
+    ax.hist(data , bins=100)
+    plt.title("Distribution of inCitations per Year in Group B")
+    plt.xlabel("inCitations per year after 2018")
+    plt.ylabel("frequency")
+    plt.show()
 
-# gB : inCitations
-fig, ax = plt.subplots(tight_layout=True)
-data = np.array(gB_statistics["inCitations"])
-data = data / data.max() # normalize
+if False:
+    # gB : inCitations
+    fig, ax = plt.subplots(tight_layout=True)
+    data = np.array(gB_statistics["inCitations"])
+    ax.hist(data , bins=100)
+    plt.title("Distribution of inCitations in Group B")
+    plt.xlabel("number of inCitations")
+    plt.ylabel("frequency")
+    plt.show()
 
-# gB : year
-fig, ax = plt.subplots(tight_layout=True)
-data = np.array(gB_statistics["year"])
-data = data / data.max() # normalize
+if True:
+    # gB : year
+    fig, ax = plt.subplots(tight_layout=True)
+    data = np.array(gB_statistics["years"])
+    ax.hist(data , bins=100)
+    plt.title("Distribution of Publication Years in Group B")
+    plt.xlabel("year published")
+    plt.ylabel("frequency")
+    plt.show()
