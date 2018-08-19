@@ -40,8 +40,10 @@ print("[#] Writing Results:")
 if False:
     # gA : outCitations
     fig, ax = plt.subplots(tight_layout=True)
+    
     data = np.array(gA_statistics["outCitations"])
-    ax.hist(data , bins=100)
+    ax.hist(data , bins=120)
+    
     plt.title("Distribution of outCitations in Group A")
     plt.xlabel("number of outCitations")
     plt.ylabel("frequency")
@@ -59,8 +61,11 @@ if False:
 if False:
     # gB : inCitationsRate
     fig, ax = plt.subplots(tight_layout=True)
+    plt.yscale('log', nonposy='clip')
+    
     data = np.array(gB_statistics["inCitationsRate"])
     ax.hist(data , bins=100)
+    
     plt.title("Distribution of inCitations per Year in Group B")
     plt.xlabel("inCitations per year after 2018")
     plt.ylabel("frequency")
@@ -69,19 +74,38 @@ if False:
 if False:
     # gB : inCitations
     fig, ax = plt.subplots(tight_layout=True)
+    plt.yscale('log', nonposy='clip')
+
     data = np.array(gB_statistics["inCitations"])
     ax.hist(data , bins=100)
+
     plt.title("Distribution of inCitations in Group B")
     plt.xlabel("number of inCitations")
     plt.ylabel("frequency")
     plt.show()
 
-if True:
+if False:
     # gB : year
+    # fig, ax = plt.figure(figsize=(6,6)), plt.axes([0,0,1,1])
     fig, ax = plt.subplots(tight_layout=True)
+    
     data = np.array(gB_statistics["years"])
-    ax.hist(data , bins=100)
+    ax.hist(data , bins=( max(data) - min(data) ))
+    
     plt.title("Distribution of Publication Years in Group B")
     plt.xlabel("year published")
+    plt.ylabel("frequency")
+    plt.show()
+
+if True:
+    # gA : author_collaborations
+    fig, ax = plt.subplots(tight_layout=True)
+    plt.yscale('log', nonposy='clip')
+    
+    data = np.array(list(gA_statistics["author_collaborations"].values()))
+    ax.hist(data , bins=( max(data) - min(data) ))
+    
+    plt.title("Collaboration Counts of Authors in Group A")
+    plt.xlabel("number of collaborations")
     plt.ylabel("frequency")
     plt.show()

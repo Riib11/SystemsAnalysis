@@ -38,7 +38,6 @@ def generate():
     graph.addAttribute( "node" , "selfCitations" , "float"  , "0.0" )
     graph.addAttribute( "node" , "color"         , "string" , "0000FF" )
 
-
     # TODO: color attribute for each paper
     # TODO: print statisics:
 
@@ -51,7 +50,7 @@ def generate():
     ################################################################
     print("[#] Analyzing Data:")
 
-    # { conference : [selfCitation, outCitations] }
+    # { conference : [#selfCitations, #outCitations] }
     conferences = {}
 
     def safeindex(d,k):
@@ -74,15 +73,23 @@ def generate():
                     safeindex(conferences,conf)[1] += 1
             except: pass
 
+    conferences_new = {}
+    for conf, cites in conferences.items():
+        total = conferences[conf][0] + conferences[conf][1]
+        conferences_new[conf] = [
+            conferences[conf][0]/total,
+            conferences[conf][1]/total]
+    conferences = conferences_new
+
     ################################################################
     print("[#] Writing file:")
 
     selfCitations_list = [ conferences[k][0] for k in conferences.keys() ]
-    color_attribute_min = min(selfCitations_list)
-    color_attribute_max = max(selfCitations_list)
+    selfCitations_min = min(selfCitations_list)
+    selfCitations_max = max(selfCitations_list)
 
-    def colorAttributeToColor(val):
-        norm = (val - color_attribute_min) / color_attribute_max
+    def attributeToColor(val, min, max):
+        norm = (val - min) / max
         return u_colors.RGBToHexColor(norm, 0.0, 1-norm)
 
     # nodes
@@ -90,7 +97,7 @@ def generate():
         graph.addNode(conf, {
             "selfCitations" : str(citations[0]),
             "outCitations"  : str(citations[1]),
-            "color"         : colorAttributeToColor(citations[0])
+            "color"         : attributeToColor(citations[0], selfCitations_min, selfCitations_max)
         })
 
     # edges (only between members of gA)

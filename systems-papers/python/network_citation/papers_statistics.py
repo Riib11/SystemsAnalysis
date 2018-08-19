@@ -24,15 +24,16 @@ print("[#] Analyzing gA Data:")
 
 statistics = {}
 
-def increment_entry(d, k):
+def increment_entry(d, k, i=1):
     k = k.lower()
     if not k in d: d[k] = 0
-    d[k] += 1
+    d[k] += i
 
 
 statistics["gA"] = {
     "outCitations": [],
-    "titlewords": {}
+    "titlewords": {},
+    "author_collaborations": {}
 }
 gA_statistics = statistics["gA"]
  
@@ -40,13 +41,22 @@ for paper in tqdm(gA.values()):
     # citation count
     outcitationcount = len(paper["outCitations"])
     gA_statistics["outCitations"].append(outcitationcount)
+    # author collaborations
+    author_ids = []
+    for a in paper["authors"]:
+        if "ids" in a and len(a["ids"]) > 0:
+            author_ids.append(a["ids"][0])
+
+    for author_id in author_ids:
+        increment_entry(gA_statistics["author_collaborations"],
+            author_id, len(author_ids)-1)
     # title words
     titlewords = paper["title"].split()
     for word in titlewords:
         increment_entry(gA_statistics["titlewords"],word)
 
 ################################################################
-print("[#] Analyzing gA Data:")
+print("[#] Analyzing gB Data:")
 
 statistics["gB"] = {
     "inCitations": [],
@@ -79,13 +89,17 @@ with open("../statistics/papers_statistics.txt","w+") as file:
     file.write("################################\n")
     file.write("gA statistics:\n")
     #
+    data = gA_statistics["outCitations"]
     file.write("  + outCitation counts:\n")
-    file.write("  |     mean : "+str(
-        np.mean(gA_statistics["outCitations"]))+"\n")
-    file.write("  |   median : "+str(
-        np.median(gA_statistics["outCitations"]))+"\n")
-    file.write("  |      std : "+str(
-        np.std(gA_statistics["outCitations"]))+"\n")
+    file.write("  |     mean : "+str(np.mean(data))+"\n")
+    file.write("  |   median : "+str(np.median(data))+"\n")
+    file.write("  |      std : "+str(np.std(data))+"\n")
+    #
+    data = list(gA_statistics["author_collaborations"].values())
+    file.write("  + author collaborations\n")
+    file.write("  |     mean : "+str(np.mean(data))+"\n")
+    file.write("  |   median : "+str(np.median(data))+"\n")
+    file.write("  |      std : "+str(np.std(data))+"\n")
     #
     file.write("  + top couple title words:\n")
     def get(i): return i[1]
@@ -97,22 +111,18 @@ with open("../statistics/papers_statistics.txt","w+") as file:
     #
     file.write("################################\n")
     file.write("gB statistics:\n")
-    #        
+    #
+    data = gB_statistics["inCitations"]
     file.write("  + inCitation/year counts:\n")
-    file.write("  |     mean : "+str(
-        np.mean(gB_statistics["inCitations"]))+"\n")
-    file.write("  |   median : "+str(
-        np.median(gB_statistics["inCitations"]))+"\n")
-    file.write("  |      std : "+str(
-        np.std(gB_statistics["inCitations"]))+"\n")
-    
+    file.write("  |     mean : "+str(np.mean(data))+"\n")
+    file.write("  |   median : "+str(np.median(data))+"\n")
+    file.write("  |      std : "+str(np.std(data))+"\n")
+    #
+    data = gB_statistics["years"]
     file.write("  + publish years:\n")
-    file.write("  |     mean : "+str(
-        np.mean(gB_statistics["years"]))+"\n")
-    file.write("  |   median : "+str(
-        np.median(gB_statistics["years"]))+"\n")
-    file.write("  |      std : "+str(
-        np.std(gB_statistics["years"]))+"\n")
+    file.write("  |     mean : "+str(np.mean(data))+"\n")
+    file.write("  |   median : "+str(np.median(data))+"\n")
+    file.write("  |      std : "+str(np.std(data))+"\n")
 
     file.write("  + top couple title words:\n")
     titlewords = sorted(list(gB_statistics["titlewords"].items()), key=get)

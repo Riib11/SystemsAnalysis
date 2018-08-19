@@ -4,6 +4,10 @@ gA statistics:
   |     mean : 28.806495263870094
   |   median : 27.0
   |      std : 15.55194108975111
+  + author collaborations
+  |     mean : 6.502653927813164
+  |   median : 5.0
+  |      std : 8.369501767467886
   + top couple title words:
   |   1. [0.148] for
   |   2. [0.09] of

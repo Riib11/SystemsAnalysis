@@ -21,3 +21,7 @@ def RGBToHexColor(a,b,c):
         prepend = '0' if normTo256(x) < 16 else ''
         hexstring += prepend + normToHex256(x)
     return hexstring
+
+def attributeToColor(val, min, max):
+    norm = (val - min) / max
+    return u_colors.RGBToHexColor(norm, 0.0, 1-norm)
