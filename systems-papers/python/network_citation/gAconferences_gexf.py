@@ -24,99 +24,99 @@ from gexf.gexf import GEXF
 import utils.data as u_data
 import semantic_scholar.s2data as s2data
 
-def generate():
+################################################################
+print("[#] Initializing GEXF")
 
-    ################################################################
-    print("[#] Initializing GEXF")
-    
-    # graph init
-    graph = GEXF("citations_gAconferences")
-    # parameters
-    graph.setParameter("graph", "defaultedgetype", "directed")
-    # attributes
-    graph.addAttribute( "node" , "outCitations"  , "float"  , "0.0" )
-    graph.addAttribute( "node" , "selfCitations" , "float"  , "0.0" )
-    graph.addAttribute( "node" , "color"         , "string" , "0000FF" )
+# graph init
+graph = GEXF("citations_gAconferences")
+# parameters
+graph.setParameter("graph", "defaultedgetype", "directed")
+# attributes
+graph.addAttribute( "node" , "outCitations"  , "float"  , "0.0" )
+graph.addAttribute( "node" , "selfCitations" , "float"  , "0.0" )
+graph.addAttribute( "node" , "color"         , "string" , "FFFFFF" )
+graph.addAttribute( "node" , "Label"         , "string" , "MISSING" )
 
-    # TODO: color attribute for each paper
-    # TODO: print statisics:
+# TODO: color attribute for each paper
+# TODO: print statisics:
 
-    ################################################################
-    print("[#] Loading Data:")
-    
-    gA = s2data.get_dict_gA()
-    gB = s2data.get_dict_gB()
+################################################################
+print("[#] Loading Data:")
 
-    ################################################################
-    print("[#] Analyzing Data:")
+gA = s2data.get_dict_gA()
+gB = s2data.get_dict_gB()
 
-    # { conference : [#selfCitations, #outCitations] }
-    conferences = {}
+################################################################
+print("[#] Analyzing Data:")
 
-    def safeindex(d,k):
-        if not k in d: d[k] = [0,0]
-        return d[k]
+# { conference : [#selfCitations, #outCitations] }
+conferences = {}
 
-    for id, paper in gA.items():
-        conf = conf_utils.normalize_conference(
-            paper["venue"])
-        if len(conf) == 0: continue
-        for target_id in paper["outCitations"]:
-            try:
-                target_paper = gB[target_id]
-                target_conf = conf_utils.normalize_conference(
-                    target_paper["venue"])
-                if len(target_conf) == 0: continue
-                if conf == target_conf:
-                    safeindex(conferences,conf)[0] += 1
-                else:
-                    safeindex(conferences,conf)[1] += 1
-            except: pass
+def safeindex(d,k):
+    if not k in d: d[k] = [0,0]
+    return d[k]
 
-    conferences_new = {}
-    for conf, cites in conferences.items():
-        total = conferences[conf][0] + conferences[conf][1]
-        conferences_new[conf] = [
-            conferences[conf][0]/total,
-            conferences[conf][1]/total]
-    conferences = conferences_new
+for id, paper in gA.items():
+    conf = conf_utils.normalize_conference(
+        paper["venue"])
+    if len(conf) == 0: continue
+    for target_id in paper["outCitations"]:
+        try:
+            target_paper = gB[target_id]
+            target_conf = conf_utils.normalize_conference(
+                target_paper["venue"])
+            if len(target_conf) == 0: continue
+            if conf == target_conf:
+                safeindex(conferences,conf)[0] += 1
+            else:
+                safeindex(conferences,conf)[1] += 1
+        except: pass
 
-    ################################################################
-    print("[#] Writing file:")
+conferences_new = {}
+for conf, cites in conferences.items():
+    total = conferences[conf][0] + conferences[conf][1]
+    conferences_new[conf] = [
+        conferences[conf][0]/total,
+        conferences[conf][1]/total]
+conferences = conferences_new
 
-    selfCitations_list = [ conferences[k][0] for k in conferences.keys() ]
-    selfCitations_min = min(selfCitations_list)
-    selfCitations_max = max(selfCitations_list)
+################################################################
+print("[#] Writing file:")
 
-    def attributeToColor(val, min, max):
-        norm = (val - min) / max
-        return u_colors.RGBToHexColor(norm, 0.0, 1-norm)
+selfCitations_list = [ conferences[k][0] for k in conferences.keys() ]
+selfCitations_min = min(selfCitations_list)
+selfCitations_max = max(selfCitations_list)
 
-    # nodes
-    for conf, citations in conferences.items():
-        graph.addNode(conf, {
-            "selfCitations" : str(citations[0]),
-            "outCitations"  : str(citations[1]),
-            "color"         : attributeToColor(citations[0], selfCitations_min, selfCitations_max)
-        })
+def attributeToColor(val, min, max):
+    norm = ((val - min) / max ) * 0.80 + 0.20
+    return u_colors.RGBToHexColor(1-norm, 1-norm, 1)
 
-    # edges (only between members of gA)
-    for id, paper in gA.items():
-        conf = conf_utils.normalize_conference(
-            paper["venue"])
-        if len(conf) == 0: continue
-        for target_id in paper["outCitations"]:
-            try:
-                target_paper = gB[target_id]
-                target_conf = conf_utils.normalize_conference(
-                    target_paper["venue"])
-                if len(target_conf) == 0: continue
-                # paper in gA
-                if target_conf in conferences and conf != target_conf:
-                    graph.addEdge(id, conf, target_conf)
-            except: pass
+# nodes
+for conf, citations in conferences.items():
+    graph.addNode(conf, {
+        "selfCitations" : str(citations[0]),
+        "outCitations"  : str(citations[1]),
+        "color"         : attributeToColor(citations[0], selfCitations_min, selfCitations_max),
+        "Label"         : conf
+    })
+
+# edges (only between members of gA)
+for id, paper in gA.items():
+    conf = conf_utils.normalize_conference(
+        paper["venue"])
+    if len(conf) == 0: continue
+    for target_id in paper["outCitations"]:
+        try:
+            target_paper = gB[target_id]
+            target_conf = conf_utils.normalize_conference(
+                target_paper["venue"])
+            if len(target_conf) == 0: continue
+            # paper in gA
+            if target_conf in conferences and conf != target_conf:
+                graph.addEdge(id, conf, target_conf)
+        except: pass
 
 
-    graph.write("../gexf/")
+graph.write("../gexf/")
 
-generate()
+# print(graph.getAllIndegrees())

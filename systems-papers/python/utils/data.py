@@ -4,7 +4,7 @@ import os
 # ON GIT
 
 # systems_papers_directory = "/data/sys-papers/"
-systems_papers_directory = "/home/blancheh/sys-papers/"
+systems_papers_directory = "../"
 
 data_directory     = systems_papers_directory+"authors/data/"
 authors_directory  = data_directory+"authors/"

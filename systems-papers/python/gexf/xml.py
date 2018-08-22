@@ -69,5 +69,5 @@ class XML:
                 file.write(line)
 
     def clean(self, s):
-        for c in XML.disallowed: s = s.replace(c,"")
+        for c in XML.disallowed: s = str(s).replace(c,"")
         return s

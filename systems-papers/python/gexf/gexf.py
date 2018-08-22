@@ -40,6 +40,33 @@ class GEXF:
         }
         self.edges[id] = edge
 
+    def getDegree(self, id):
+        x = 0
+        for e in self.edges.values():
+            if id == e["target"] or id == e["source"]:
+                x += e["weight"]
+        return x
+
+    def getIndegree(self, id):
+        x = 0
+        for e in self.edges.values():
+            if id == e["target"]:
+                x += e["weight"]
+        return x
+
+    def getAllIndegrees(self):
+        return [ self.getIndegree(id) for id in self.nodes.keys() ]
+
+    def getOutdegree(self, id):
+        x = 0
+        for e in self.edges.values():
+            if id == e["source"]:
+                x += e["weight"]
+        return x
+
+    def getAllOutdegrees(self):
+        return [ self.getOutdegree(id) for id in self.nodes.keys() ]
+
     def write(self, directory):
         xml = XML(self.name + ".gexf")
         

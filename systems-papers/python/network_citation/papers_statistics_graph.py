@@ -37,10 +37,11 @@ gB_statistics = statistics["gB"]
 ################################################################
 print("[#] Writing Results:")
 
+fig = plt.figure(figsize=(13/1.4,6/1.4))
+ax = fig.add_subplot(111)
+
 if False:
-    # gA : outCitations
-    fig, ax = plt.subplots(tight_layout=True)
-    
+    # gA : outCitations    
     data = np.array(gA_statistics["outCitations"])
     ax.hist(data , bins=120)
     
@@ -60,7 +61,6 @@ if False:
 
 if False:
     # gB : inCitationsRate
-    fig, ax = plt.subplots(tight_layout=True)
     plt.yscale('log', nonposy='clip')
     
     data = np.array(gB_statistics["inCitationsRate"])
@@ -73,7 +73,6 @@ if False:
 
 if False:
     # gB : inCitations
-    fig, ax = plt.subplots(tight_layout=True)
     plt.yscale('log', nonposy='clip')
 
     data = np.array(gB_statistics["inCitations"])
@@ -86,9 +85,6 @@ if False:
 
 if False:
     # gB : year
-    # fig, ax = plt.figure(figsize=(6,6)), plt.axes([0,0,1,1])
-    fig, ax = plt.subplots(tight_layout=True)
-    
     data = np.array(gB_statistics["years"])
     ax.hist(data , bins=( max(data) - min(data) ))
     
@@ -99,13 +95,40 @@ if False:
 
 if True:
     # gA : author_collaborations
-    fig, ax = plt.subplots(tight_layout=True)
     plt.yscale('log', nonposy='clip')
     
     data = np.array(list(gA_statistics["author_collaborations"].values()))
     ax.hist(data , bins=( max(data) - min(data) ))
+
+    # raw = np.array(list(gA_statistics["author_collaborations"].values()))
+
+    # data = []
+    # for i in range(max(raw)):
+    #     total = len([ x for x in raw if i >= x ])
+    #     data.append(total)
+    # data = np.array(data)
+
+    # ax.fill_between( np.arange(0,len(data)), 0, data )
     
-    plt.title("Collaboration Counts of Authors in Group A")
+    plt.title("Collaboration Counts of Authors")
     plt.xlabel("number of collaborations")
     plt.ylabel("frequency")
+    # plt.ylabel("authors with at least x collaborationis")
+    plt.show()
+
+if False:
+    # gA confs : indegrees
+    raw = [34, 27, 30, 16, 123, 84, 117, 1, 37, 56, 86, 10, 16, 21, 4, 16, 1, 101, 115, 1, 89, 6, 14, 21, 32, 0, 11, 57, 61, 7, 49, 16, 40, 16, 32, 35, 2, 2, 12, 4, 14, 26, 6, 17, 6, 105, 6, 3, 5, 42, 23, 41, 1, 7, 0]
+    
+    data = []
+    for i in range(max(raw)):
+        total = len([ x for x in raw if i >= x ])
+        data.append(total)
+    data = np.array(data)
+
+    ax.fill_between( np.arange(0,len(data)), 0, data )
+
+    plt.title("In-citation Distribution among Conferences")
+    plt.xlabel("number of in-citations")
+    plt.ylabel("conferences with at least x in-citations")
     plt.show()

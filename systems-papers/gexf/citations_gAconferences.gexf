@@ -8,7 +8,10 @@
                 <default>0.0</default>
             </attribute>
             <attribute id="color" type="string" title="color">
-                <default>0000FF</default>
+                <default>FFFFFF</default>
+            </attribute>
+            <attribute id="Label" type="string" title="Label">
+                <default>MISSING</default>
             </attribute>
         </attributes>
         <attributes class="edge">
@@ -18,385 +21,440 @@
                 <attvalues>
                     <attvalue for="selfCitations" value="0.06467661691542288"/>
                     <attvalue for="outCitations" value="0.9353233830845771"/>
-                    <attvalue for="color" value="#3e00c0"/>
+                    <attvalue for="color" value="#9a9aff"/>
+                    <attvalue for="Label" value="HPCA"/>
                 </attvalues>
             </node>
             <node id="PACT">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.03734439834024896"/>
                     <attvalue for="outCitations" value="0.9626556016597511"/>
-                    <attvalue for="color" value="#2300db"/>
+                    <attvalue for="color" value="#afafff"/>
+                    <attvalue for="Label" value="PACT"/>
                 </attvalues>
             </node>
             <node id="IPDPS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.015022533800701052"/>
                     <attvalue for="outCitations" value="0.9849774661992989"/>
-                    <attvalue for="color" value="#0e00f0"/>
+                    <attvalue for="color" value="#c0c0ff"/>
+                    <attvalue for="Label" value="IPDPS"/>
                 </attvalues>
             </node>
             <node id="ISPASS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.05439330543933055"/>
                     <attvalue for="outCitations" value="0.9456066945606695"/>
-                    <attvalue for="color" value="#3400ca"/>
+                    <attvalue for="color" value="#a2a2ff"/>
+                    <attvalue for="Label" value="ISPASS"/>
                 </attvalues>
             </node>
             <node id="KDD">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.12712550607287448"/>
                     <attvalue for="outCitations" value="0.8728744939271255"/>
-                    <attvalue for="color" value="#7a0084"/>
+                    <attvalue for="color" value="#6a6aff"/>
+                    <attvalue for="Label" value="KDD"/>
                 </attvalues>
             </node>
             <node id="SIGCOMM">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.2655935613682093"/>
                     <attvalue for="outCitations" value="0.7344064386317908"/>
-                    <attvalue for="color" value="#ff0000"/>
+                    <attvalue for="color" value="#0000ff"/>
+                    <attvalue for="Label" value="SIGCOMM"/>
                 </attvalues>
             </node>
             <node id="ISCA">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.15388888888888888"/>
                     <attvalue for="outCitations" value="0.8461111111111111"/>
-                    <attvalue for="color" value="#93006b"/>
+                    <attvalue for="color" value="#5555ff"/>
+                    <attvalue for="Label" value="ISCA"/>
                 </attvalues>
             </node>
             <node id="PACMPL">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.00338409475465313"/>
                     <attvalue for="outCitations" value="0.9966159052453468"/>
-                    <attvalue for="color" value="#0300fb"/>
+                    <attvalue for="color" value="#c9c9ff"/>
+                    <attvalue for="Label" value="PACMPL"/>
                 </attvalues>
             </node>
             <node id="FAST">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.1827956989247312"/>
                     <attvalue for="outCitations" value="0.8172043010752689"/>
-                    <attvalue for="color" value="#af004f"/>
+                    <attvalue for="color" value="#3f3fff"/>
+                    <attvalue for="Label" value="FAST"/>
                 </attvalues>
             </node>
             <node id="MICRO">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.08878048780487804"/>
                     <attvalue for="outCitations" value="0.911219512195122"/>
-                    <attvalue for="color" value="#5500a9"/>
+                    <attvalue for="color" value="#8787ff"/>
+                    <attvalue for="Label" value="MICRO"/>
                 </attvalues>
             </node>
             <node id="SOSP">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.0903277378097522"/>
                     <attvalue for="outCitations" value="0.9096722621902478"/>
-                    <attvalue for="color" value="#5600a8"/>
+                    <attvalue for="color" value="#8686ff"/>
+                    <attvalue for="Label" value="SOSP"/>
                 </attvalues>
             </node>
             <node id="SYSTOR">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.02280130293159609"/>
                     <attvalue for="outCitations" value="0.9771986970684039"/>
-                    <attvalue for="color" value="#1500e9"/>
+                    <attvalue for="color" value="#babaff"/>
+                    <attvalue for="Label" value="SYSTOR"/>
                 </attvalues>
             </node>
             <node id="CIDR">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.04930662557781202"/>
                     <attvalue for="outCitations" value="0.9506933744221879"/>
-                    <attvalue for="color" value="#2f00cf"/>
+                    <attvalue for="color" value="#a6a6ff"/>
+                    <attvalue for="Label" value="CIDR"/>
                 </attvalues>
             </node>
             <node id="CCS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.018105009052504527"/>
                     <attvalue for="outCitations" value="0.9818949909474954"/>
-                    <attvalue for="color" value="#1100ed"/>
+                    <attvalue for="color" value="#bebeff"/>
+                    <attvalue for="Label" value="CCS"/>
                 </attvalues>
             </node>
             <node id="HOTOS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.024390243902439025"/>
                     <attvalue for="outCitations" value="0.975609756097561"/>
-                    <attvalue for="color" value="#1700e7"/>
+                    <attvalue for="color" value="#b9b9ff"/>
+                    <attvalue for="Label" value="HOTOS"/>
                 </attvalues>
             </node>
             <node id="ICDM">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.020741671904462602"/>
                     <attvalue for="outCitations" value="0.9792583280955374"/>
-                    <attvalue for="color" value="#1300eb"/>
+                    <attvalue for="color" value="#bcbcff"/>
+                    <attvalue for="Label" value="ICDM"/>
                 </attvalues>
             </node>
             <node id="CCGRID">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.002749770852428964"/>
                     <attvalue for="outCitations" value="0.997250229147571"/>
-                    <attvalue for="color" value="#0200fc"/>
+                    <attvalue for="color" value="#c9c9ff"/>
+                    <attvalue for="Label" value="CCGRID"/>
                 </attvalues>
             </node>
             <node id="ASPLOS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.08230958230958231"/>
                     <attvalue for="outCitations" value="0.9176904176904177"/>
-                    <attvalue for="color" value="#4f00af"/>
+                    <attvalue for="color" value="#8c8cff"/>
+                    <attvalue for="Label" value="ASPLOS"/>
                 </attvalues>
             </node>
             <node id="PLDI">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.12527312454479242"/>
                     <attvalue for="outCitations" value="0.8747268754552076"/>
-                    <attvalue for="color" value="#780086"/>
+                    <attvalue for="color" value="#6b6bff"/>
+                    <attvalue for="Label" value="PLDI"/>
                 </attvalues>
             </node>
             <node id="DSS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.004519774011299435"/>
                     <attvalue for="outCitations" value="0.9954802259887006"/>
-                    <attvalue for="color" value="#0400fa"/>
+                    <attvalue for="color" value="#c8c8ff"/>
+                    <attvalue for="Label" value="DSS"/>
                 </attvalues>
             </node>
             <node id="NSDI">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.10092514718250631"/>
                     <attvalue for="outCitations" value="0.8990748528174937"/>
-                    <attvalue for="color" value="#60009e"/>
+                    <attvalue for="color" value="#7e7eff"/>
+                    <attvalue for="Label" value="NSDI"/>
                 </attvalues>
             </node>
             <node id="ICPP">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.007291666666666667"/>
                     <attvalue for="outCitations" value="0.9927083333333333"/>
-                    <attvalue for="color" value="#0700f7"/>
+                    <attvalue for="color" value="#c6c6ff"/>
+                    <attvalue for="Label" value="ICPP"/>
                 </attvalues>
             </node>
             <node id="SIGIR">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.1909307875894988"/>
                     <attvalue for="outCitations" value="0.8090692124105012"/>
-                    <attvalue for="color" value="#b70047"/>
+                    <attvalue for="color" value="#3939ff"/>
+                    <attvalue for="Label" value="SIGIR"/>
                 </attvalues>
             </node>
             <node id="PODS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.10410958904109589"/>
                     <attvalue for="outCitations" value="0.8958904109589041"/>
-                    <attvalue for="color" value="#63009b"/>
+                    <attvalue for="color" value="#7c7cff"/>
+                    <attvalue for="Label" value="PODS"/>
                 </attvalues>
             </node>
             <node id="SC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.021809369951534735"/>
                     <attvalue for="outCitations" value="0.9781906300484653"/>
-                    <attvalue for="color" value="#1400ea"/>
+                    <attvalue for="color" value="#bbbbff"/>
+                    <attvalue for="Label" value="SC"/>
                 </attvalues>
             </node>
             <node id="IMC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.008802816901408451"/>
                     <attvalue for="outCitations" value="0.9911971830985915"/>
-                    <attvalue for="color" value="#0800f6"/>
+                    <attvalue for="color" value="#c5c5ff"/>
+                    <attvalue for="Label" value="IMC"/>
                 </attvalues>
             </node>
             <node id="VEE">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.0594059405940594"/>
                     <attvalue for="outCitations" value="0.9405940594059405"/>
-                    <attvalue for="color" value="#3900c5"/>
+                    <attvalue for="color" value="#9e9eff"/>
+                    <attvalue for="Label" value="VEE"/>
                 </attvalues>
             </node>
             <node id="EUROSYS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.04052863436123348"/>
                     <attvalue for="outCitations" value="0.9594713656387666"/>
-                    <attvalue for="color" value="#2600d8"/>
+                    <attvalue for="color" value="#acacff"/>
+                    <attvalue for="Label" value="EUROSYS"/>
                 </attvalues>
             </node>
             <node id="NDSS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.08124076809453472"/>
                     <attvalue for="outCitations" value="0.9187592319054653"/>
-                    <attvalue for="color" value="#4e00b0"/>
+                    <attvalue for="color" value="#8d8dff"/>
+                    <attvalue for="Label" value="NDSS"/>
                 </attvalues>
             </node>
             <node id="CLUSTER">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.01445578231292517"/>
                     <attvalue for="outCitations" value="0.9855442176870748"/>
-                    <attvalue for="color" value="#0d00f1"/>
+                    <attvalue for="color" value="#c0c0ff"/>
+                    <attvalue for="Label" value="CLUSTER"/>
                 </attvalues>
             </node>
             <node id="PPOPP">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.08501440922190202"/>
                     <attvalue for="outCitations" value="0.9149855907780979"/>
-                    <attvalue for="color" value="#5100ad"/>
+                    <attvalue for="color" value="#8a8aff"/>
+                    <attvalue for="Label" value="PPOPP"/>
                 </attvalues>
             </node>
             <node id="IISWC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.03234501347708895"/>
                     <attvalue for="outCitations" value="0.967654986522911"/>
-                    <attvalue for="color" value="#1f00df"/>
+                    <attvalue for="color" value="#b3b3ff"/>
+                    <attvalue for="Label" value="IISWC"/>
                 </attvalues>
             </node>
             <node id="SIGMETRICS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.06525911708253358"/>
                     <attvalue for="outCitations" value="0.9347408829174664"/>
-                    <attvalue for="color" value="#3e00c0"/>
+                    <attvalue for="color" value="#9999ff"/>
+                    <attvalue for="Label" value="SIGMETRICS"/>
                 </attvalues>
             </node>
             <node id="MOBICOM">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.1353887399463807"/>
                     <attvalue for="outCitations" value="0.8646112600536193"/>
-                    <attvalue for="color" value="#81007d"/>
+                    <attvalue for="color" value="#6464ff"/>
+                    <attvalue for="Label" value="MOBICOM"/>
                 </attvalues>
             </node>
             <node id="HPDC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.02564102564102564"/>
                     <attvalue for="outCitations" value="0.9743589743589743"/>
-                    <attvalue for="color" value="#1800e6"/>
+                    <attvalue for="color" value="#b8b8ff"/>
+                    <attvalue for="Label" value="HPDC"/>
                 </attvalues>
             </node>
             <node id="SPAA">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.08623548922056384"/>
                     <attvalue for="outCitations" value="0.9137645107794361"/>
-                    <attvalue for="color" value="#5200ac"/>
+                    <attvalue for="color" value="#8989ff"/>
+                    <attvalue for="Label" value="SPAA"/>
                 </attvalues>
             </node>
             <node id="SLE">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.04466501240694789"/>
                     <attvalue for="outCitations" value="0.9553349875930521"/>
-                    <attvalue for="color" value="#2a00d4"/>
+                    <attvalue for="color" value="#a9a9ff"/>
+                    <attvalue for="Label" value="SLE"/>
                 </attvalues>
             </node>
             <node id="HOTI">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.0072992700729927005"/>
                     <attvalue for="outCitations" value="0.9927007299270073"/>
-                    <attvalue for="color" value="#0700f7"/>
+                    <attvalue for="color" value="#c6c6ff"/>
+                    <attvalue for="Label" value="HOTI"/>
                 </attvalues>
             </node>
             <node id="ISC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.026143790849673203"/>
                     <attvalue for="outCitations" value="0.9738562091503268"/>
-                    <attvalue for="color" value="#1900e5"/>
+                    <attvalue for="color" value="#b7b7ff"/>
+                    <attvalue for="Label" value="ISC"/>
                 </attvalues>
             </node>
             <node id="CLOUD">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.013368983957219251"/>
                     <attvalue for="outCitations" value="0.9866310160427807"/>
-                    <attvalue for="color" value="#0c00f2"/>
+                    <attvalue for="color" value="#c1c1ff"/>
+                    <attvalue for="Label" value="CLOUD"/>
                 </attvalues>
             </node>
             <node id="HOTCLOUD">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.015527950310559006"/>
                     <attvalue for="outCitations" value="0.984472049689441"/>
-                    <attvalue for="color" value="#0e00f0"/>
+                    <attvalue for="color" value="#c0c0ff"/>
+                    <attvalue for="Label" value="HOTCLOUD"/>
                 </attvalues>
             </node>
             <node id="EURO-PAR">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.014598540145985401"/>
                     <attvalue for="outCitations" value="0.9854014598540146"/>
-                    <attvalue for="color" value="#0e00f0"/>
+                    <attvalue for="color" value="#c0c0ff"/>
+                    <attvalue for="Label" value="EURO-PAR"/>
                 </attvalues>
             </node>
             <node id="MIDDLEWARE">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.019189765458422176"/>
                     <attvalue for="outCitations" value="0.9808102345415778"/>
-                    <attvalue for="color" value="#1200ec"/>
+                    <attvalue for="color" value="#bdbdff"/>
+                    <attvalue for="Label" value="MIDDLEWARE"/>
                 </attvalues>
             </node>
             <node id="NEXT">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.038980509745127435"/>
                     <attvalue for="outCitations" value="0.9610194902548725"/>
-                    <attvalue for="color" value="#2500d9"/>
+                    <attvalue for="color" value="#aeaeff"/>
+                    <attvalue for="Label" value="NEXT"/>
                 </attvalues>
             </node>
             <node id="ICAC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.02880658436213992"/>
                     <attvalue for="outCitations" value="0.9711934156378601"/>
-                    <attvalue for="color" value="#1b00e3"/>
+                    <attvalue for="color" value="#b5b5ff"/>
+                    <attvalue for="Label" value="ICAC"/>
                 </attvalues>
             </node>
             <node id="SIGMOD">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.18163592622293503"/>
                     <attvalue for="outCitations" value="0.818364073777065"/>
-                    <attvalue for="color" value="#ae0050"/>
+                    <attvalue for="color" value="#4040ff"/>
+                    <attvalue for="Label" value="SIGMOD"/>
                 </attvalues>
             </node>
             <node id="MASCOTS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.0"/>
                     <attvalue for="outCitations" value="1.0"/>
-                    <attvalue for="color" value="#0000ff"/>
+                    <attvalue for="color" value="#ccccff"/>
+                    <attvalue for="Label" value="MASCOTS"/>
                 </attvalues>
             </node>
             <node id="ICPE">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.04424778761061947"/>
                     <attvalue for="outCitations" value="0.9557522123893806"/>
-                    <attvalue for="color" value="#2a00d4"/>
+                    <attvalue for="color" value="#aaaaff"/>
+                    <attvalue for="Label" value="ICPE"/>
                 </attvalues>
             </node>
             <node id="HOTSTORAGE">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.040740740740740744"/>
                     <attvalue for="outCitations" value="0.9592592592592593"/>
-                    <attvalue for="color" value="#2700d7"/>
+                    <attvalue for="color" value="#acacff"/>
+                    <attvalue for="Label" value="HOTSTORAGE"/>
                 </attvalues>
             </node>
             <node id="IACR">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.05421686746987952"/>
                     <attvalue for="outCitations" value="0.9457831325301205"/>
-                    <attvalue for="color" value="#3400ca"/>
+                    <attvalue for="color" value="#a2a2ff"/>
+                    <attvalue for="Label" value="IACR"/>
                 </attvalues>
             </node>
             <node id="PODC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.10047095761381476"/>
                     <attvalue for="outCitations" value="0.8995290423861853"/>
-                    <attvalue for="color" value="#60009e"/>
+                    <attvalue for="color" value="#7e7eff"/>
+                    <attvalue for="Label" value="PODC"/>
                 </attvalues>
             </node>
             <node id="SOCC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.04110612855007474"/>
                     <attvalue for="outCitations" value="0.9588938714499252"/>
-                    <attvalue for="color" value="#2700d7"/>
+                    <attvalue for="color" value="#acacff"/>
+                    <attvalue for="Label" value="SOCC"/>
                 </attvalues>
             </node>
             <node id="IGSC">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.031746031746031744"/>
                     <attvalue for="outCitations" value="0.9682539682539683"/>
-                    <attvalue for="color" value="#1e00e0"/>
+                    <attvalue for="color" value="#b3b3ff"/>
+                    <attvalue for="Label" value="IGSC"/>
                 </attvalues>
             </node>
             <node id="IPDPSW">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.008064516129032258"/>
                     <attvalue for="outCitations" value="0.9919354838709677"/>
-                    <attvalue for="color" value="#0700f7"/>
+                    <attvalue for="color" value="#c5c5ff"/>
+                    <attvalue for="Label" value="IPDPSW"/>
                 </attvalues>
             </node>
             <node id="POMACS">
                 <attvalues>
                     <attvalue for="selfCitations" value="0.0"/>
                     <attvalue for="outCitations" value="1.0"/>
-                    <attvalue for="color" value="#0000ff"/>
+                    <attvalue for="color" value="#ccccff"/>
+                    <attvalue for="Label" value="POMACS"/>
                 </attvalues>
             </node>
         </nodes>

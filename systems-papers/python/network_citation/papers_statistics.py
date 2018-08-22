@@ -36,6 +36,10 @@ statistics["gA"] = {
     "author_collaborations": {}
 }
 gA_statistics = statistics["gA"]
+
+statistics["gAconfs"] = {
+    "inCitaitons": []
+}
  
 for paper in tqdm(gA.values()):
     # citation count
