@@ -7,3 +7,6 @@ In this project I analyze network-level relationships among papers from over 54 
 - Author citations
 - Conference citations
 
+# UPDATE
+
+This repository is now deprecated, and our research has continued at: https://github.com/Riib11/SocialNetworks.
